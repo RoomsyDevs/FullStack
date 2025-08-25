@@ -24,3 +24,12 @@ Desde el punto de vista técnico:
 Utiliza las tecnologías vistas en el cuatrimestre (HTML, CSS, JavaScript, Bootstrap, Python y MySQL).
 - Protege los datos personales mediante buenas prácticas de seguridad.
 A futuro, se proyecta la posibilidad de evolucionar hacia una aplicación móvil nativa y ampliar funcionalidades como calendario de disponibilidad, métricas y pasarela de pagos.
+
+### Problema a resolver:
+En Córdoba, muchos hospedajes familiares o rústicos carecen de presencia digital efectiva. Esto limita su alcance y dificulta que los turistas accedan a experiencias auténticas. Las plataformas tradicionales priorizan opciones comerciales, invisibilizando lo local.
+
+RoomsyDevs busca revertir esta situación con:
+
+- Una plataforma accesible que prioriza la identidad local.
+- Registro simple para anfitriones sin intermediarios.
+- Herramientas para que los turistas descubran, contacten y guarden hospedajes según sus intereses.
