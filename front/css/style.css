@@ -33,13 +33,15 @@ body {
   padding: 0;
 }
 
-/* ---- Esto por ahora mientras estamos trabajando en las pags*/
+/* ---- Esto por ahora mientras estamos trabajando en las pags
 .en-construccion h2 {
   text-align: center;
   font-size: 2.4rem;
   font-family: var(--fuente-heading);
   margin-bottom: 1rem;
 }
+
+*/
 
 /* Títulos */
 .titulo-principal,
@@ -251,27 +253,6 @@ body {
 
 
 /* =========================
-   LOGO Y NAVBAR
-========================= */
-.logo-roomsy { 
-    color: green;
-    font-size: xx-large;
-} 
-
-.logo-devs {
-    color: #F66B00;
-    font-size: xx-large;
-    font-weight: bold;
-}
-
-.iniciar, .registrarse { 
-    color: white;
-    background-color: #F66B00;
-    border-radius: 7px;
-    margin-left: 10px; 
-}
-
-/* =========================
    HERO
 ========================= */
 .hero {
@@ -299,7 +280,7 @@ body {
 }
 
 .btn-orange {
-    background-color: #f97316;
+    background-color: #f66b00;
     color: white;
     border-radius: 25px;
     padding: 8px 20px;
@@ -348,22 +329,7 @@ section p {
     border-radius: 5px;
 }
 
-/* =========================
-   BOTÓN VER MÁS
-========================= */
-.btn-outline-success {
-    color: #16a34a;
-    border-color: #16a34a;
-    border-radius: 25px;
-    padding: 8px 20px;
-    transition: all 0.3s;
-}
 
-.btn-outline-success:hover {
-    background-color: #16a34a;
-    color: white;
-    border-color: #16a34a;
-}
 
 /* =========================
    FOOTER
