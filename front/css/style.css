@@ -243,3 +243,130 @@ body {
     text-align: center;
   }
 }
+
+
+/* =========================
+   LOGO Y NAVBAR
+========================= */
+.logo-roomsy { 
+    color: green;
+    font-size: xx-large;
+} 
+
+.logo-devs {
+    color: #F66B00;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.iniciar, .registrarse { 
+    color: white;
+    background-color: #F66B00;
+    border-radius: 7px;
+    margin-left: 10px; 
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px;
+    height: 70vh;
+    border-radius: 15px;
+    color: white;
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("hero.jpeg") center/cover no-repeat;
+}
+
+.hero-text p {
+    color: white; /* texto “Territorio, descanso, vínculo” en blanco */
+}
+
+.search-bar {
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px;
+}
+
+.btn-orange {
+    background-color: #f97316;
+    color: white;
+    border-radius: 25px;
+    padding: 8px 20px;
+    transition: background-color 0.3s;
+}
+
+.btn-orange:hover {
+    background-color: #ea580c;
+}
+
+/* =========================
+   BANNER 3 COLUMNAS
+========================= */
+section h2 {
+    color: #1f2937;
+}
+
+section h5 {
+    color: #f97316;
+}
+
+section p {
+    color: #374151;
+}
+
+
+/* =========================
+   GRILLA 4 HOSPEDAJES
+========================= */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.carousel-caption h5,
+.carousel-caption p {
+    background-color: rgba(0,0,0,0.5);
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* =========================
+   BOTÓN VER MÁS
+========================= */
+.btn-outline-success {
+    color: #16a34a;
+    border-color: #16a34a;
+    border-radius: 25px;
+    padding: 8px 20px;
+    transition: all 0.3s;
+}
+
+.btn-outline-success:hover {
+    background-color: #16a34a;
+    color: white;
+    border-color: #16a34a;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer a {
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #f97316;
+}
