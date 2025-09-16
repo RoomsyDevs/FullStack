@@ -7,6 +7,11 @@
   --color-blanco: #ffffff;
   --color-negro: #000000;
   --color-fondo: #f8f9fa;
+
+    /* === VARIABLES AÑADIDAS PARA EL MÓDULO DEL FORMULARIO === */
+    --color-texto: #333333;
+    --color-gris-medio: #e0e0e0;
+    --color-gris-oscuro: #666666;
 }
 
 /* Estructura general */
@@ -369,4 +374,231 @@ footer a {
 
 footer a:hover {
     color: #f97316;
+}
+
+/* ========================================================== */
+/* === MÓDULO DE ESTILOS PARA PÁGINA DE FORMULARIO (fp-) === */
+/* ========================================================== */
+
+
+/* --- Encabezado del Formulario (fp-header) --- */
+.fp-header {
+  background-color: var(--color-blanco);
+  padding: 15px 0;
+}
+
+.fp-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fp-logo {
+  text-decoration: none;
+  color: var(--color-acento-naranja); 
+  font-size: 2.8rem;
+  font-weight: 700;
+}
+
+.fp-logo-devs {
+  color: var(--color-texto); 
+  font-weight: 600;
+}
+
+.fp-header-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+/* --- Botones específicos del formulario --- */
+.fp-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.fp-btn-primary {
+  background-color: var(--color-acento-naranja);
+  color: var(--color-primario);
+  border: 2px solid var(--color-acento-naranja);
+}
+
+.fp-btn-primary:hover {
+  background-color: #e0701a;
+}
+
+.fp-btn-outline {
+  border: 2px solid var(--color-acento-naranja);
+  color: var(--color-acento-naranja);
+  background-color: transparent;
+}
+
+.fp-btn-outline:hover {
+  background-color: var(--color-acento-naranja);
+  color: var(--color-blanco);
+}
+
+
+/* --- Sección Hero del Formulario (fp-hero) --- */
+.fp-hero {
+  margin: 40px auto;
+  max-width: 1200px;
+  height: 500px;
+  background-image:url("../img/hero-background.jpeg"); 
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: var(--color-blanco);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  padding: 40px;
+}
+
+.fp-hero-content {
+  max-width: 700px;
+}
+
+.fp-hero h1 {
+  font-size: 4.5rem;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.fp-hero p {
+  font-size: 1.6rem;
+  color: var(--color-blanco);
+}
+
+/* --- Sección del Formulario --- */
+.fp-form-section {
+  padding: 60px 20px;
+  background-color: #f8f9fa; 
+}
+
+.fp-form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--color-blanco);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.11);
+}
+
+.fp-form-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.8rem;
+}
+
+.fp-form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.fp-form-group {
+  flex: 1;
+}
+
+/* Estilos para inputs dentro del formulario fp */
+.fp-form-container input[type="text"],
+.fp-form-container input[type="email"],
+.fp-form-container input[type="tel"],
+.fp-form-container textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--color-gris-medio, #e0e0e0); 
+  border-radius: 8px;
+  font-family: var(--fuente-parrafos);
+  font-size: 1.6rem;
+}
+
+.fp-form-container input:focus, 
+.fp-form-container textarea:focus {
+  outline: none;
+  border-color: var(--color-acento-naranja);
+  box-shadow: 0 0 5px rgba(245, 132, 40, 0.5);
+}
+
+/* --- Pie de Página del Formulario (fp-footer) --- */
+.fp-footer {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.fp-footer h3 {
+  margin-bottom: 20px;
+  font-size: 2.2rem;
+}
+
+.fp-social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.fp-social-links a {
+  text-decoration: none;
+  color: var(--color-gris-oscuro, #666);
+  background-color: var(--color-gris-medio, #e0e0e0);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 1.4rem;
+  transition: all 0.3s;
+}
+
+.fp-social-links a:hover {
+  background-color: var(--color-gris-oscuro, #666);
+  color: var(--color-blanco);
+}
+
+.fp-social-links i {
+  margin-right: 8px;
+}
+
+.fp-copyright {
+  font-size: 1.4rem;
+  color: var(--color-gris-oscuro, #666);
+}
+
+.fp-privacy-notice {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: var(--color-gris-oscuro, #666);
+}
+
+/* --- Media Queries para el Módulo de Formulario --- */
+@media (max-width: 992px) {
+  .fp-header .container {
+      flex-direction: column;
+      gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .fp-hero {
+      height: auto;
+      padding: 60px 20px;
+      text-align: center;
+  }
+
+  .fp-hero h1 {
+      font-size: 3.6rem;
+  }
+
+  .fp-form-row {
+      flex-direction: column;
+      margin-bottom: 0;
+  }
+
+  .fp-form-row .fp-form-group {
+      margin-bottom: 20px;
+  }
 }
