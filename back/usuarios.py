@@ -1,129 +1,134 @@
-# usuarios.py -->se definen las clases Usuario y Administrador
+from conexion import conectar
 
-from auth import validar_login, validar_telefono, validar_email, validar_rol, validar_contrasena, validar_email_unico 
-from dataclasses import dataclass
+class usuario:
+    def __init__(self, id, nombre, apellido, email, contrasena, rol, telefono):
+        self.id= id
+        self.nombre = nombre
+        self.apellido = apellido
+        self.email= email
+        self.contrasena = contrasena
+        self.rol = rol
+        self.telefono = telefono    
 
-@dataclass
-class Usuario:
-    nombre: str
-    apellido: str
-    email: str
-    contrasena: str
-    rol: str
-    telefono: str
-
-class Anfitrion(Usuario):
-    def __init__(self, nombre, apellido, email, contrasena, telefono):
-        super().__init__(nombre, apellido, email, contrasena, "anfitrion", telefono)
-
-
-class admin(Usuario):
-    def __init__(self, nombre, apellido, username, email, contrasena):
-        super().__init__(nombre, apellido, email, contrasena, "admin", telefono="N/A")
+class admin(usuario):
+    def __init__(self, id, nombre, apellido, email, contrasena, username):
+        super().__init__(id, nombre, apellido, email, contrasena, "admin", telefono="N/A")
         self.username = username
 
-usuarios = [
-    admin('Florencia', 'Lorenzati', 'Florencier', 'florencia@gmail.com', 'flor123'),
-    admin('Ignacio', 'Bentivoglio', 'Nacher','ignacio@gmail.com', 'nacho123'),
-    Usuario('Gloria', 'López', 'gloria@gmail.com', 'gloria123', "anfitrion", "+5412345690"),
-    Usuario('Marcos', 'Fernández', 'marcos@gmail.com', 'marcos123', "anfitrion", "+5412347890"),
-    Usuario('Lucas', 'Martínez', 'lucas@gmail.com', 'lucas123', "+5412567890", "turista"),
-    Usuario('Teodoro', 'Ramírez', 'teodoro@gmail.com', 'teo123', "+5434567890", "turista")
-    ]
+class anfitrion(usuario):
+    pass
 
-def iniciar_sesion():
-    email = validar_email()
-    contrasena = input("Contraseña:")
+class turista(usuario):
+    pass
 
-    for usuario in usuarios:
-        if usuario.email == email:
-            if validar_login(usuario, contrasena):
-                print(f"\nBienvenido, {usuario.nombre} ({usuario.rol})")
-                return usuario
+def registrar_usuario(nombre, apellido, email, contrasena, telefono, rol, username=None):
+    conn = conectar()
+    cursor = conn.cursor()
 
-    print("\nError: Mail o contraseña incorrectas.")
-    return None
+    if rol == "admin":
+        cursor.execute("""
+        INSERT INTO usuarios (nombre, apellido, email, contrasena, telefono, rol, estado, username)
+        VALUES (%s, %s, %s, %s, %s, %s, 1, %s)
+        """, (nombre, apellido, email, contrasena, telefono, rol, username))
+    else:
+        cursor.execute("""
+        INSERT INTO usuarios (nombre, apellido, email, contrasena, telefono, rol, estado)
+        VALUES (%s, %s, %s, %s, %s, %s, 1)
+        """, (nombre, apellido, email, contrasena, telefono, rol))
 
-def registrar_usuario(usuarios):
-    print("\n<<< Registro de usuario >>>")
     
-    nombre = input("Nombre: ")
-    apellido = input("Apellido: ")
-    email = validar_email_unico(usuarios)
-    contrasena = validar_contrasena()
-    telefono = input("Ingrese su Teléfono (sin +54): ").strip()
-    while not validar_telefono(telefono):
-        print("Error, el número de telefono ingresado debe tener entre 10 y 11 dígitos, solo digitar números.")
-        telefono = input ("Ingrese su Teléfono (sin +54): ").strip()
-    telefono = "+54" + telefono
-        
+    conn.commit()
+    conn.close()
 
-    rol = validar_rol()
-    if rol == "anfitrion":
-        nuevo_usuario = Anfitrion(nombre, apellido, email, contrasena, telefono)
-    else:
-        nuevo_usuario = Usuario(nombre, apellido, email, contrasena, telefono, "turista")
+def iniciar_sesion(email, contrasena):
+    conn= conectar()
+    cursor =conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM usuarios WHERE email = %s AND estado = 1", (email,))
+    usuario = cursor.fetchone()
+    conn.close()
 
-    usuarios.append(nuevo_usuario)
-    print(f"\nUsuario registrado: {nuevo_usuario.nombre} {nuevo_usuario.apellido} {nuevo_usuario.telefono} ({nuevo_usuario.rol})")
-    return nuevo_usuario
+    if usuario and usuario["contrasena"] == contrasena:
+        if usuario["rol"] == "admin":
+            return admin(usuario["id"], usuario["nombre"], usuario["apellido"], usuario["email"], usuario["contrasena"], usuario["username"])
+        elif usuario["rol"] == "anfitrion":
+            return anfitrion(
+            id=usuario["id"],
+            nombre=usuario["nombre"],
+            apellido=usuario["apellido"],
+            email=usuario["email"],
+            contrasena=usuario["contrasena"],
+            rol=usuario["rol"],
+            telefono=usuario["telefono"]
+            )
 
-def modificar_usuario(admin):
-    if admin.rol != "admin":
-        print("\nError: Solo los administradores pueden modificar usuarios.")
-        return
+        elif usuario["rol"] == "turista":
+            return turista(
+                id=usuario["id"],
+                nombre=usuario["nombre"],
+                apellido=usuario["apellido"],
+                email=usuario["email"],
+                contrasena=usuario["contrasena"],
+                rol=usuario["rol"],
+                telefono=usuario["telefono"]
+            )
+
+        else:
+            return None
     
-    print("\nUsuarios:")
-    mostrar_usuarios()
+def modificar_cuenta(usuario, nuevo_nombre, nuevo_apellido, nuevo_telefono, nueva_contrasena):
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("""
+        UPDATE usuarios
+        SET nombre = %s, apellido = %s, telefono = %s, contrasena = %s
+        WHERE id = %s
+    """, (nuevo_nombre, nuevo_apellido, nuevo_telefono, nueva_contrasena, usuario.id))
+    conn.commit()
+    conn.close()
 
-    id_usuario = int(input("Elegi el número del usuario a editar: ")) - 1
-
-    if 0 <= id_usuario < len(usuarios) and usuarios[id_usuario].rol != "admin":
-        nuevo_nombre = input("Nuevo nombre: ")
-        nuevo_apellido = input("Nuevo apellido: ")
-        email_actual = usuarios[id_usuario].email
-        nuevo_email = validar_email_unico(usuarios, email_actual)
-        nuevo_telefono = input("Ingrese su nuevo telefono (sin +54): ").strip()
-        while not validar_telefono(nuevo_telefono):
-            print("Número inválido")
-            nuevo_telefono = input("Ingrese su nuevo telefono (sin el +54: )")
-        nuevo_telefono = "+54" + nuevo_telefono
-
-        nueva_contrasena = validar_contrasena()
-
-        for indice_usuario, usuario in enumerate(usuarios):
-            if any(i != id_usuario and u.email == nuevo_email for i, u in enumerate(usuarios)):
-                print("\nError: Este email ya se encuentra registrado.")
-                return
-
-        usuarios[id_usuario].nombre = nuevo_nombre
-        usuarios[id_usuario].apellido = nuevo_apellido
-        usuarios[id_usuario].email = nuevo_email
-        usuarios[id_usuario].contrasena = nueva_contrasena
-        usuarios[id_usuario].telefono = nuevo_telefono
-
-        print("\nUsuario modificado con éxito")
-    else:
-        print("\nError: No se puede modificar a un usuario Administrador o el número es inválido")
-
-def eliminar_usuario(admin):
-    if admin.rol != "admin":
-        print("\nError: Solo un administrador puede eliminar usuarios.")
-        return
-
-    print("\nUsuarios:")
-    for indice_usuario, usuario in enumerate(usuarios, 1):
-        print(f"{indice_usuario}. {usuario.nombre} {usuario.apellido} - {usuario.email} ({usuario.rol})")
-
-    id_usuario = int(input("\nElegí el número del usuario que quiere eliminar: ")) - 1
-
-    if 0 <= id_usuario < len(usuarios) and usuarios[id_usuario].rol != "admin":
-        usuarios.pop(id_usuario)
-        print("\nUsuario eliminado con éxito.")
-    else:
-        print("\nError: no se puede eliminar a un admin")
+def eliminar_cuenta(usuario):
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("UPDATE usuarios SET estado = 0 WHERE id = %s", (usuario.id,))
+    conn.commit()
+    conn.close()
 
 def mostrar_usuarios():
-    print("\nLista de Usuarios: ")
-    for indice_usuario, usuario in enumerate(usuarios, 1):
-        print(f"{indice_usuario}. {usuario.nombre} {usuario.apellido} - {usuario.email} ({usuario.rol})")
+    conn = conectar()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM usuarios WHERE estado = 1")
+    usuarios = cursor.fetchall()
+    conn.close()
+
+    for u in usuarios:
+        print(f"{u['id']}. {u['nombre']} {u['apellido']} {u['email']} ({u['rol']})")
+
+def modificar_usuario(id_usuario, nuevo_nombre, nuevo_apellido, nuevo_telefono, nueva_contrasena):
+    conn = conectar()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM usuarios WHERE id = %s AND estado = 1", (id_usuario,))
+    usuario = cursor.fetchone()
+
+    if usuario and usuario ["rol"] != "admin":
+        cursor = conn.cursor()
+        cursor.execute("""
+        UPDATE usuarios SET nombre = %s, apellido = %s, telefono = %s, contrasena = %s WHERE id = %s
+        """, (nuevo_nombre, nuevo_apellido, nuevo_telefono, nueva_contrasena, id_usuario))
+        conn.commit()
+        conn.close()
+
+def eliminar_usuario(id_usuario):
+    conn = conectar()
+    cursor = conn. cursor (dictionary=True)
+    cursor.execute("SELECT * FROM usuarios WHERE id = %s AND estado = 1", (id_usuario,))
+    usuario = cursor.fetchone()
+
+    if usuario and usuario["rol"] != "admin":
+        cursor = conn.cursor()
+        cursor.execute("UPDATE usuarios SET estado = 0 WHERE id = %s", (id_usuario,))
+        conn.commit()
+        conn.close
+
+def crear_admin(nombre, apellido, email, contrasena, username):
+    registrar_usuario(nombre, apellido, email, contrasena, telefono="N/A", rol="admin", username=username)
+    return True

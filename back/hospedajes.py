@@ -1,48 +1,107 @@
-hospedajes = []
-def registrar_hospedaje(anfitrion):
-    print("n\<<< Registrar nuevo hospedaje >>>")
+from auth import validar_precio
+from conexion import conectar
+
+class hospedaje:
+    def __init__(self, id, anfitrion_id, titulo, descripcion, precio):
+        self.id = id
+        self.anfitrion_id = anfitrion_id
+        self.titulo = titulo
+        self.descripcion = descripcion
+        self.precio = precio
+
+def registrar_hospedaje(usuario):
+    print("\n<<< Rgistrar nuevo hospedaje >>>")
     titulo = input("Título del hospedaje: ").strip()
-    descripcion = input("Descripción del hospedaje: ").strip()
-    precio = input("Precio por noche: ").strip()
+    descripcion = input("Descripción del hospedaje: ").strip() 
+    precio = validar_precio()
 
-    hospedaje = {
-        "anfitrion": anfitrion.email,
-        "titulo": titulo,
-        "descripcion": descripcion,
-        "precio": precio
-    }
-    
-    hospedajes.append(hospedaje)
-    print("\nHospedaje registrado!!")
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(*) FROM ubicaciones")
+    if cursor.fetchone()[0] == 0:
+        cursor.execute("INSERT INTO ubicaciones (ciudad, provincia) VALUES ('Sin definir en este sprint', 'Sin definir en este sprint')")
+        conn.commit()
 
-def mostrar_hospedaje_registrado(anfitrion):
+    cursor.execute("SELECT COUNT(*) FROM categorias")
+    if cursor.fetchone()[0] == 0:
+        cursor.execute("INSERT INTO categorias (nombre) VALUES ('Sin definir en este sprint')")
+        conn.commit()
+    cursor.execute("SELECT id FROM categorias WHERE nombre = 'Sin definir en este sprint'")
+    categoria_id = cursor.fetchone()[0]
+        
+
+
+    cursor.execute("""
+    INSERT INTO hospedajes (anfitrion_id, titulo, descripcion, precio_por_noche, capacidad, direccion, ubicacion_id, categoria_id, disponible)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 1)
+""", (usuario.id, titulo, descripcion, precio, 1, "Dirección no definida para este sprint", 1, categoria_id))
+    conn.commit()
+    conn.close()
+    print("\nHospedaje registrado con éxito.")
+
+def mostrar_hospedaje_registrado(usuario):
+    conn = conectar()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT id, titulo, descripcion, precio_por_noche
+        FROM hospedajes
+        WHERE anfitrion_id = %s AND activo = 1
+    """, (usuario.id,))
+    hospedajes = cursor.fetchall()
+    conn.close()
+
     print("\n<<< Tus hospedajes publicados >>>")
-    encontrados = [h for h in hospedajes if h["anfitrion"] == anfitrion.email]
-    if not encontrados:
-        print("No tenés hospedajes registrados.")
-    else:
-        for i, h in enumerate(encontrados, 1):
-            print(f"{i}. {h['titulo']} - {h['descripcion']} (${h['precio']}/noche)")
-
-def eliminar_hospedaje(anfitrion):
-    mostrar_hospedaje_registrado(anfitrion)
-    encontrados = [h for h in hospedajes if h["anfitrion"] == anfitrion.email]
-    if not encontrados:
-        return
-    
-    opciones = int(input("Elija el número del hospedaje que desea eliminar: ")) - 1
-    if 0 <= opciones < len(encontrados):
-        hospedajes.remove(encontrados[opciones])
-        print("Hospedaje eliminado con éxito.")
-    else:
-        print("Opción no válida.")
-
-
-def mostrar_hospedajes():
-    print("\n<<< Hospedajes disponibles >>>")
     if not hospedajes:
-        print("No hay hospedajes publicados")
+        print("No tenés ningún hospedaje registrado.")
     else:
         for i, h in enumerate(hospedajes, 1):
-            print(f"{i}. {h['titulo']} - (${h['precio']}/noche)")
+            print(f"{i}. {h['titulo']} {h['descripcion']} (${h['precio_por_noche']}/noche)")
+
+
+def eliminar_hospedaje(usuario):
+    conn = conectar()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("""
+    SELECT id, titulo FROM hospedajes
+    WHERE anfitrion_id = %s AND activo = 1
+""", (usuario.id,))
+    hospedajes = cursor.fetchall()
+
+    if not hospedajes:
+        print("No tenés ningún hospedaje registrado.")
+        conn.close()
+        return
+    
+    print("\n<<< Eliminar hospedaje >>>")
+    for i, h in enumerate(hospedajes, 1):
+        print(f"{i}. {h['titulo']}")
+
+    opcion = int(input("Elegí el número del hospedaje que deseas eliminar: ")) - 1
+    if 0 <= opcion < len(hospedajes):
+        id_hospedaje = hospedajes[opcion]["id"]
+        cursor = conn.cursor()
+        cursor.execute("UPDATE hospedajes SET activo = 0 WHERE id = %s", (id_hospedaje,))
+        conn.commit()
+        print("Hospedaje eliminado con éxito.")
+    else:
+        print("Opción inválida.")
+    conn.close()
+
+def mostrar_hospedaje():
+    conn = conectar()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("""
+    SELECT titulo, descripcion, precio_por_noche
+    FROM hospedajes
+    WHERE disponible = 1
+""")
+    hospedajes = cursor.fetchall()
+    conn.close()
+
+    print("\n<<< Hospedajes publicados en RoomsyDevs >>>")
+    if not hospedajes:
+        print("No hay hospedajes publicados.")
+    else:
+        for i, h in enumerate(hospedajes, 1):
+            print(f"{i}. {h['titulo']} (${h['precio_por_noche']}/noche)")
             print(f"{h['descripcion']}")
