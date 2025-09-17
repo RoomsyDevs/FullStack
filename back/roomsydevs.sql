@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-09-2025 a las 01:05:57
+-- Tiempo de generación: 17-09-2025 a las 04:22:44
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -105,9 +105,11 @@ CREATE TABLE `usuarios` (
   `email` varchar(120) NOT NULL,
   `contrasena` varchar(255) NOT NULL,
   `telefono` varchar(30) DEFAULT NULL,
-  `fecha_alta` date NOT NULL,
+  `fecha_alta` datetime DEFAULT current_timestamp(),
   `rol` varchar(20) NOT NULL,
-  `activo` tinyint(1) NOT NULL DEFAULT 1
+  `activo` tinyint(1) NOT NULL DEFAULT 1,
+  `username` varchar(50) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
