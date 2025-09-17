@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoomsyDevs - Publicá tu hospedaje</title>
+    <!-- ¡IMPORTANTE! Solo enlaza a style.css -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Google Fonts (Asegúrate que Poppins esté incluido si style.css no lo tiene) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <!-- Clases actualizadas con prefijo 'fp-' -->
+    <header class="fp-header">
+        <nav>
+            <div class="navegacion">
+              <a href="index.html">
+                <img src="../img/Logo.png" alt="RoomsyDevs" class="logo-img" />
+              </a>
+              <div class="botones">
+                <a href="galeria.html" class="btn btn-texto">Ver hospedajes</a>
+                <a href="#" class="btn btn-outline-naranja">Iniciar sesión</a>
+                <a href="#" class="btn btn-naranja">Registrarse</a>
+              </div>
+            </div>
+          </nav>
+    </header>
+
+    <main>
+        <section class="fp-hero">
+            <div class="fp-hero-content">
+                <h1>Publicá tu hospedaje con confianza.</h1>
+                <p>
+                    Completá el formulario y accedé al proceso de publicación. 
+                    La publicación se activa con una <strong>cuota mensual</strong>, que garantiza visibilidad, soporte y transparencia. 
+                    Te contactaremos con los pasos y detalles.
+                </p>
+            </div>
+        </section>
+
+        <section class="fp-form-section">
+            <div class="fp-form-container">
+                <h2>Contanos cómo es tu hospedaje y si tenés alguna duda, Estamos para ayudarte</h2><br>
+
+                <form action="#">
+                    <div class="fp-form-row">
+                        <div class="fp-form-group">
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombre *" required>
+                        </div>
+                        <div class="fp-form-group">
+                            <input type="text" id="apellido" name="apellido" placeholder="Apellido *" required>
+                        </div>
+                    </div>
+                    <div class="fp-form-row">
+                        <div class="fp-form-group">
+                            <input type="email" id="email" name="email" placeholder="Email *" required>
+                        </div>
+                        <div class="fp-form-group">
+                            <input type="tel" id="telefono" name="telefono" placeholder="Teléfono *" required>
+                        </div>
+                    </div>
+                    <div class="fp-form-group">
+                        <textarea id="mensaje" name="mensaje" rows="6" placeholder="Mensaje *" required></textarea>
+                    </div>
+                    <button type="submit" class="fp-btn fp-btn-primary" style="width: 100%; padding: 15px; font-size: 18px;">Enviar</button>
+                </form>
+                <p class="fp-privacy-notice">
+                    Al enviar este formulario, aceptás que RoomsyDevs utilice esta información para publicar tu hospedaje y facilitar el contacto con potenciales visitantes. Más info en nuestra Política de Privacidad.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="fp-footer">
+        <div class="container">
+            <h3>Seguinos en</h3>
+            <p class="fp-privacy-notice">
+                Seguinos en redes sociales para estar al tanto de las ultimas ofertas, eventos y mucho mas.
+            </p>
+            <br>
+            <div class="fp-social-links">
+                <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+                <a href="#"><i class="fab fa-x-twitter"></i>x</a>
+                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+            </div>
+            <p class="fp-copyright">Copyright &copy; 2025 RoomsyDevs. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
