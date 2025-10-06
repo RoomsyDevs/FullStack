@@ -40,11 +40,11 @@ def validar_telefono():
 
 def validar_rol():
     while True:
-        rol = input("Roles (admin / anfitrion / turista): ").strip().lower()
-        if rol in ["anfitrion", "turista", "admin"]:
+        rol = input("Roles (anfitrion / turista): ").strip().lower()
+        if rol in ["anfitrion", "turista"]:
             return rol
         else:
-            print("Error: El rol solo puede ser 'anfitrion', 'turista' o 'admin'")
+            print("Error: El rol solo puede ser 'anfitrion' o 'turista'")
 
 def validar_username_unico():
     while True:
