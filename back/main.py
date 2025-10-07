@@ -1,5 +1,5 @@
 from usuarios import registrar_usuario, iniciar_sesion, modificar_usuario, eliminar_usuario, mostrar_usuarios, modificar_cuenta, eliminar_cuenta
-from hospedajes import registrar_hospedaje, mostrar_hospedaje_registrado, eliminar_hospedaje, mostrar_hospedaje
+from hospedajes import registrar_hospedaje, mostrar_hospedaje_registrado, eliminar_hospedaje, mostrar_hospedaje, disponibilidad_hospedaje
 from auth import validar_email_unico, validar_contrasena, validar_rol, validar_username_unico, validar_telefono
 from conexion import conectar
 
@@ -8,10 +8,11 @@ def menu_anfitrion(usuario):
         print("\n<<< Menú Anfitrión >>>")
         print("1. Registrar hospedaje")
         print("2. Ver hospedajes publicados")
-        print("3. Eliminar hospedaje")
-        print("4. Editar usuario")
-        print("5. Eliminar cuenta")
-        print("6. Cerrar sesión")
+        print("3. Cambiar disponibilidad de hospedaje")
+        print("4. Eliminar hospedaje")
+        print("5. Editar usuario")
+        print("6. Eliminar cuenta")
+        print("7. Cerrar sesión")
 
         opcion = input("Seleccionar una opción: ").strip()
 
@@ -20,8 +21,10 @@ def menu_anfitrion(usuario):
         elif opcion == '2':
             mostrar_hospedaje_registrado(usuario)
         elif opcion == '3':
-            eliminar_hospedaje(usuario)
+            disponibilidad_hospedaje(usuario)
         elif opcion == '4':
+            eliminar_hospedaje(usuario)
+        elif opcion == '5':
             nuevo_nombre = input("Nuevo nombre: ").strip()
             nuevo_apellido = input("Nuevo apellido: ").strip()
             nuevo_telefono = validar_telefono()
@@ -29,10 +32,10 @@ def menu_anfitrion(usuario):
 
             modificar_cuenta(usuario, nuevo_nombre, nuevo_apellido, nuevo_telefono, nueva_contrasena)
 
-        elif opcion == '5':
+        elif opcion == '6':
             if eliminar_cuenta(usuario):
                 break
-        elif opcion == '6':
+        elif opcion == '7':
             print("Su sesión finalizó con éxito.")
             break
         else:
