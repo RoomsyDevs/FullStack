@@ -1,5 +1,32 @@
 from conexion import conectar
 
+class Auth:
+    def __init__(self):
+        self.__intentos = 0
+
+    def iniciar_sesion(self, email, contrasena):
+        conn = conectar()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM usuarios WHERE email = %s", (email,))
+        usuario = cursor.fetchone()
+        conn.close()
+
+        if not usuario:
+            print("Usuario no encontrado.")
+            return None
+
+        while self.__intentos < 3:
+            if usuario["contrasena"] == contrasena:
+                print(f"Bienvenido, {usuario['nombre']}.")
+                return usuario
+            else:
+                self.__intentos += 1
+                print(f"Contraseña incorrecta ({self.__intentos}/3).")
+                contrasena = input("Reintentar contraseña: ")
+
+        print("Demasiados intentos. Cuenta bloqueada temporalmente.")
+        return None
+
 def validar_email():
     while True:
         email = input("Email: ").strip()
@@ -40,11 +67,11 @@ def validar_telefono():
 
 def validar_rol():
     while True:
-        rol = input("Roles (anfitrion / turista): ").strip().lower()
-        if rol in ["anfitrion", "turista"]:
+        rol = input("Roles (admin / anfitrion / turista): ").strip().lower()
+        if rol in ["anfitrion", "turista", "admin"]:
             return rol
         else:
-            print("Error: El rol solo puede ser 'anfitrion' o 'turista'")
+            print("Error: El rol solo puede ser 'anfitrion', 'turista' o 'admin'")
 
 def validar_username_unico():
     while True:
