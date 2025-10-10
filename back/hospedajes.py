@@ -1,6 +1,33 @@
 from auth import validar_precio
 from conexion import conectar
 
+class Hospedaje:
+    def __init__(self, anfitrion_id, titulo, descripcion, precio, ciudad, provincia):
+        self.__anfitrion_id = anfitrion_id
+        self.__titulo = titulo
+        self.__descripcion = descripcion
+        self.__precio = precio
+        self.__ciudad = ciudad
+        self.__provincia = provincia
+
+    def registrar(self):
+        conn = conectar()
+        cursor = conn.cursor()
+
+        # Insertar ubicación
+        cursor.execute("INSERT INTO ubicaciones (ciudad, provincia) VALUES (%s, %s)",
+                       (self.__ciudad, self.__provincia))
+        ubicacion_id = cursor.lastrowid
+
+        # Insertar hospedaje
+        cursor.execute("""
+            INSERT INTO hospedajes (anfitrion_id, titulo, descripcion, precio_por_noche, capacidad, direccion, ubicacion_id, categoria_id, disponible)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, 1, 1)
+        """, (self.__anfitrion_id, self.__titulo, self.__descripcion, self.__precio, 1, "Dirección no definida", ubicacion_id))
+        conn.commit()
+        conn.close()
+        print("Hospedaje registrado correctamente.")
+
 class hospedaje:
     def __init__(self, id, anfitrion_id, titulo, descripcion, precio):
         self.id = id
@@ -63,7 +90,7 @@ def eliminar_hospedaje(usuario):
     cursor = conn.cursor(dictionary=True)
     cursor.execute("""
     SELECT id, titulo FROM hospedajes
-    WHERE anfitrion_id = %s
+    WHERE anfitrion_id = %s AND activo = 1
 """, (usuario.id,))
     hospedajes = cursor.fetchall()
 
@@ -76,26 +103,22 @@ def eliminar_hospedaje(usuario):
     for i, h in enumerate(hospedajes, 1):
         print(f"{i}. {h['titulo']}")
 
-    opcion = input("Elegí el número del hospedaje que deseas eliminar: ").strip()
-    if opcion.isdigit():
-        opcion = int(opcion) - 1
-        if 0 <= opcion < len(hospedajes):
-            id_hospedaje = hospedajes[opcion]["id"]
-            cursor = conn.cursor()
-            cursor.execute("DELETE FROM hospedajes WHERE id = %s", (id_hospedaje,))
-            conn.commit()
-            print("Hospedaje eliminado con éxito.")
-        else:
-            print("Opción inválida.")
+    opcion = int(input("Elegí el número del hospedaje que deseas eliminar: ")) - 1
+    if 0 <= opcion < len(hospedajes):
+        id_hospedaje = hospedajes[opcion]["id"]
+        cursor = conn.cursor()
+        cursor.execute("UPDATE hospedajes SET activo = 0 WHERE id = %s", (id_hospedaje,))
+        conn.commit()
+        print("Hospedaje eliminado con éxito.")
     else:
-        print("Por favor ingresar un número válido.")
+        print("Opción inválida.")
     conn.close()
 
 def mostrar_hospedaje():
     conn = conectar()
     cursor = conn.cursor(dictionary=True)
     cursor.execute("""
-    SELECT titulo, descripcion, precio_por_noche, disponible
+    SELECT titulo, descripcion, precio_por_noche
     FROM hospedajes
     WHERE disponible = 1
 """)
@@ -109,41 +132,3 @@ def mostrar_hospedaje():
         for i, h in enumerate(hospedajes, 1):
             print(f"{i}. {h['titulo']} (${h['precio_por_noche']}/noche)")
             print(f"{h['descripcion']}")
-
-def disponibilidad_hospedaje(usuario):
-    conn = conectar()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("""
-    SELECT id, titulo, disponible FROM hospedajes
-    WHERE anfitrion_id = %s AND activo = 1
-""", (usuario.id,))
-    hospedajes = cursor.fetchall()
-
-    if not hospedajes:
-        print("No tenés ningún hospedaje registrado.")
-        conn.close()
-        return
-    
-    print("\n<<< Cambiar disponibilidad de hospedaje >>>")
-    for i, h in enumerate(hospedajes, 1):
-        estado = "Disponible" if h["disponible"] == 1 else "No disponible"
-        print(f"{i}. {h['titulo']} ({estado})")
-
-    opcion = input("Elegí el número del hospedaje que deseas modificar: ").strip()
-    if opcion.isdigit():
-        opcion = int(opcion) - 1
-        if 0 <= opcion < len(hospedajes):
-            id_hospedaje = hospedajes[opcion]["id"]
-            nuevo_estado = input ("¿Te gustaría poner el hospedaje como Disponible (1) o como No disponible (0)? ").strip()
-            if nuevo_estado in ["0", "1"]:
-                cursor = conn.cursor()
-                cursor.execute("UPDATE hospedajes SET disponible = %s WHERE id = %s", (int(nuevo_estado), id_hospedaje))
-                conn.commit()
-                print("Estado de disponibilidad actualizado.")
-            else:
-                print("Tipo de estado inválido, por favor ingrese 1 o 0.")
-        else:
-            print("Opción inválida.")
-    else:
-        print("Debe ingresar un número válido")
-    conn.close()
