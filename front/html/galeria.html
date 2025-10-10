@@ -21,51 +21,62 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="icon" href="../img/logo icono.ico" type="image/ico" />
   </head>
-  <body>
-    <nav>
-      <div class="navegacion">
-        <a href="../index.html">
-          <img src="../img/Logo.png" alt="RoomsyDevs" class="logo-img" />
-        </a>
-        <div class="botones">
-          <a href="galeria.html" class="btn btn-texto">Ver hospedajes</a>
-          <a href="publicar-hospedaje.html" class="btn btn-texto"
-            >Publicar hospedaje</a
-          >
-          <a href="#" class="btn btn-outline-naranja">Iniciar sesión</a>
-          <a href="#" class="btn btn-naranja">Registrarse</a>
-        </div>
-      </div>
-    </nav>
 
-    <section class="container mt-4">
-      <div class="hero hero--galeria">
+  <body>
+    <header>
+      <nav>
+        <div class="navegacion">
+          <a href="../index.html">
+            <img src="../img/Logo.png" alt="RoomsyDevs" class="logo-img" />
+          </a>
+          <div class="botones">
+            <a href="/html/galeria.html" class="btn btn-texto"
+              >Ver hospedajes</a
+            >
+            <a href="/html/publicar-hospedaje.html" class="btn btn-texto"
+              >Publicar hospedaje</a
+            >
+            <a href="#" class="btn btn-outline-naranja">Iniciar sesión</a>
+            <a href="#" class="btn btn-naranja">Registrarse</a>
+          </div>
+        </div>
+      </nav>
+
+      <section class="hero hero--galeria container mt-4 text-center py-5">
         <div class="hero-text">
-          <h1 class="fw-bold">Encontrá tu próximo hospedaje<br /></h1>
+          <h1 class="fw-bold">Encontrá tu próximo hospedaje</h1>
           <p>Más de 500 hospedajes ubicados en la provincia de Córdoba</p>
         </div>
-      </div>
-    </section>
+      </section>
+    </header>
 
     <main class="container my-5">
       <div class="row gx-4 gy-5">
-        <div class="col-md-6">
+        <!-- Card 1 -->
+        <article class="col-md-6">
           <div class="card hospedaje-card d-flex flex-column flex-md-row">
-            <div class="col-md-4 p-0">
+            <div class="col-12 col-md-4 p-0">
               <img
-                src="/img/hospedaje-5.jpeg"
+                src="../img/hospedaje1_sanjavier_3.png"
                 class="img-fluid hospedaje-img"
-                alt="Cabaña en San Javier"
+                alt="Casona en San Javier"
               />
             </div>
-            <div class="col-md-8 p-0">
+            <div class="col-12 col-md-8 p-0">
               <div class="card-body hospedaje-body">
-                <h5 class="titulo-tarjeta">Cabaña en San Javier</h5>
-                <h5 class="precio-tarjeta">Desde $45000</h5>
+                <h5
+                  class="titulo-tarjeta"
+                  data-nombre="Casona en San Javier"
+                  data-ubicacion="San Javier, Córdoba"
+                  data-precio="45000"
+                  data-actualizado="hace 6 horas"
+                >
+                  Casona en San Javier
+                </h5>
+                <h5 class="precio-tarjeta">Desde $45.000</h5>
                 <p class="card-text">
                   Rústica casa de época. Cuenta con una hermosa vista panorámica
                   al valle de Traslasierra.
@@ -75,165 +86,233 @@
                     >Actualizado hace 6 horas</small
                   >
                 </p>
-                <a href="#" class="btn btn-outline-verde"> Más info </a>
+                <a
+                  href="descripcion-hospedaje.html"
+                  class="btn btn-outline-verde"
+                  >Más info</a
+                >
               </div>
             </div>
           </div>
-        </div>
+        </article>
 
-        <div class="col-md-6">
+        <!-- Card 2 -->
+        <article class="col-md-6">
           <div class="card hospedaje-card d-flex flex-column flex-md-row">
-            <div class="col-md-4 p-0">
+            <div class="col-12 col-md-4 p-0">
               <img
-                src="/img/hospedaje-1.jpeg"
+                src="../img/hospedaje2_cumbrecita_1.jpg"
                 class="img-fluid hospedaje-img"
                 alt="Casa en La Cumbrecita"
               />
             </div>
-            <div class="col-md-8 p-0">
+            <div class="col-12 col-md-8 p-0">
               <div class="card-body hospedaje-body">
-                <h5 class="titulo-tarjeta">Casa de campo en La Cumbrecita</h5>
-                <h5 class="precio-tarjeta">Desde $45000</h5>
+                <h5
+                  class="titulo-tarjeta"
+                  data-nombre="Casa de campo en La Cumbrecita"
+                  data-ubicacion="La Cumbrecita, Córdoba"
+                  data-precio="23500"
+                  data-actualizado="hace 1 día"
+                >
+                  Casa de campo en La Cumbrecita
+                </h5>
+                <h5 class="precio-tarjeta">Desde $23.500</h5>
                 <p class="card-text">
                   Hospedaje cercano a arroyos, ubicado en el pueblo. Tiene patio
                   amplio con asador.
                 </p>
                 <p class="card-text">
-                  <small class="text-body-secondary">Actualizado ayer</small>
+                  <small class="text-body-secondary"
+                    >Actualizado hace 1 día</small
+                  >
                 </p>
-                <a href="#" class="btn btn-outline-verde"> Más info </a>
+                <a
+                  href="descripcion-hospedaje2.html"
+                  class="btn btn-outline-verde"
+                  >Más info</a
+                >
               </div>
             </div>
           </div>
-        </div>
+        </article>
 
-        <div class="col-md-6">
+        <!-- Card 3 -->
+        <article class="col-md-6">
           <div class="card hospedaje-card d-flex flex-column flex-md-row">
-            <div class="col-md-4 p-0">
+            <div class="col-12 col-md-4 p-0">
               <img
-                src="/img/hospedaje-3.jpg"
+                src="../img/hospedaje3_villa general belgrano_1.png"
                 class="img-fluid hospedaje-img"
                 alt="Loft en Villa General Belgrano"
               />
             </div>
-            <div class="col-md-8 p-0">
+            <div class="col-12 col-md-8 p-0">
               <div class="card-body hospedaje-body">
-                <h5 class="titulo-tarjeta">
+                <h5
+                  class="titulo-tarjeta"
+                  data-nombre="Cabañita para 4 personas"
+                  data-ubicacion="Villa General Belgrano, Córdoba"
+                  data-precio="51700"
+                  data-actualizado="hace 2 días"
+                >
                   Cabañita para 4 personas, oportunidad!!
                 </h5>
-                <h5 class="precio-tarjeta">Desde $45000</h5>
+                <h5 class="precio-tarjeta">Desde $51.700</h5>
                 <p class="card-text">
                   Casa en alquiler temporada. Ideal para parejas que prefieren
                   la naturaleza.
                 </p>
                 <p class="card-text">
                   <small class="text-body-secondary"
-                    >Actualizado hace 2 semanas</small
+                    >Actualizado hace 2 días</small
                   >
                 </p>
-                <a href="#" class="btn btn-outline-verde"> Más info </a>
+                <a
+                  href="descripcion-hospedaje3.html"
+                  class="btn btn-outline-verde"
+                  >Más info</a
+                >
               </div>
             </div>
           </div>
-        </div>
+        </article>
 
-        <div class="col-md-6">
+        <!-- Card 4 -->
+        <article class="col-md-6">
           <div class="card hospedaje-card d-flex flex-column flex-md-row">
-            <div class="col-md-4 p-0">
+            <div class="col-12 col-md-4 p-0">
               <img
-                src="/img/hospedaje-6.jpg"
+                src="../img/hospedaje4_rioceballos_1.png"
+                class="img-fluid hospedaje-img"
+                alt="Domo en Río Ceballos"
+              />
+            </div>
+            <div class="col-12 col-md-8 p-0">
+              <div class="card-body hospedaje-body">
+                <h5
+                  class="titulo-tarjeta"
+                  data-nombre="Domo en Río Ceballos"
+                  data-ubicacion="Río Ceballos, Córdoba"
+                  data-precio="39000"
+                  data-actualizado="hace 3 días"
+                >
+                  Domo en Río Ceballos
+                </h5>
+                <h5 class="precio-tarjeta">Desde $39.000</h5>
+                <p class="card-text">
+                  Si querés pasar tus vacaciones en un lugar único, este domo es
+                  para vos. Cuenta con energía solar y todos los servicios.
+                </p>
+                <p class="card-text">
+                  <small class="text-body-secondary"
+                    >Actualizado hace 3 días</small
+                  >
+                </p>
+                <a
+                  href="descripcion-hospedaje.html"
+                  class="btn btn-outline-verde"
+                  >Más info</a
+                >
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="col-md-6">
+          <div class="card hospedaje-card d-flex flex-column flex-md-row">
+            <div class="col-12 col-md-4 p-0">
+              <img
+                src="../img/hospedaje5_rioceballos_1.png"
+                class="img-fluid hospedaje-img"
+                alt="Otro Domo en Río Ceballos"
+              />
+            </div>
+            <div class="col-12 col-md-8 p-0">
+              <div class="card-body hospedaje-body">
+                <h5
+                  class="titulo-tarjeta"
+                  data-nombre="Otro Domo en Río Ceballos"
+                  data-ubicacion="Río Ceballos, Córdoba"
+                  data-precio="41300"
+                  data-actualizado="hace 4 días"
+                >
+                  Otro Domo en Río Ceballos
+                </h5>
+                <h5 class="precio-tarjeta">Desde $41.300</h5>
+                <p class="card-text">
+                  Si querés pasar tus vacaciones en un lugar único, este domo es
+                  para vos. Cuenta con energía solar y todos los servicios.
+                </p>
+                <p class="card-text">
+                  <small class="text-body-secondary"
+                    >Actualizado hace 4 días</small
+                  >
+                </p>
+                <a
+                  href="descripcion-hospedaje2.html"
+                  class="btn btn-outline-verde"
+                  >Más info</a
+                >
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="col-md-6">
+          <div class="card hospedaje-card d-flex flex-column flex-md-row">
+            <div class="col-12 col-md-4 p-0">
+              <img
+                src="../img/hospedaje6_nono_4.png"
                 class="img-fluid hospedaje-img"
                 alt="Refugio en Nono"
               />
             </div>
-            <div class="col-md-8 p-0">
+            <div class="col-12 col-md-8 p-0">
               <div class="card-body hospedaje-body">
-                <h5 class="titulo-tarjeta">Domo en Río Ceballos</h5>
-                <h5 class="precio-tarjeta">Desde $45000</h5>
+                <h5
+                  class="titulo-tarjeta"
+                  data-nombre="Refugio en Nono"
+                  data-ubicacion="Nono, Córdoba"
+                  data-precio="45000"
+                  data-actualizado="hace 5 días"
+                >
+                  Refugio en Nono
+                </h5>
+                <h5 class="precio-tarjeta">Desde $45.000</h5>
                 <p class="card-text">
-                  Si queres pasar tus vacaciones en un lugar único, este domo es
-                  para vos. Cuenta con energía solar y todos lso servicios.
+                  Si querés pasar tus vacaciones en un lugar único, este domo es
+                  para vos. Cuenta con energía solar y todos los servicios.
                 </p>
                 <p class="card-text">
                   <small class="text-body-secondary"
                     >Actualizado hace 5 días</small
                   >
                 </p>
-                <a href="#" class="btn btn-outline-verde"> Más info </a>
+                <a
+                  href="descripcion-hospedaje3.html"
+                  class="btn btn-outline-verde"
+                  >Más info</a
+                >
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="card hospedaje-card d-flex flex-column flex-md-row">
-            <div class="col-md-4 p-0">
-              <img
-                src="/img/hospedaje-6.jpg"
-                class="img-fluid hospedaje-img"
-                alt="Refugio en Nono"
-              />
-            </div>
-            <div class="col-md-8 p-0">
-              <div class="card-body hospedaje-body">
-                <h5 class="titulo-tarjeta">Otro Domo en Río Ceballos</h5>
-                <h5 class="precio-tarjeta">Desde $45000</h5>
-                <p class="card-text">
-                  Si queres pasar tus vacaciones en un lugar único, este domo es
-                  para vos. Cuenta con energía solar y todos lso servicios.
-                </p>
-                <p class="card-text">
-                  <small class="text-body-secondary"
-                    >Actualizado hace 5 días</small
-                  >
-                </p>
-                <a href="#" class="btn btn-outline-verde"> Más info </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="card hospedaje-card d-flex flex-column flex-md-row">
-            <div class="col-md-4 p-0">
-              <img
-                src="/img/hospedaje-6.jpg"
-                class="img-fluid hospedaje-img"
-                alt="Refugio en Nono"
-              />
-            </div>
-            <div class="col-md-8 p-0">
-              <div class="card-body hospedaje-body">
-                <h5 class="titulo-tarjeta">y Otro Domo más</h5>
-                <h5 class="precio-tarjeta">Desde $45000</h5>
-                <p class="card-text">
-                  Si queres pasar tus vacaciones en un lugar único, este domo es
-                  para vos. Cuenta con energía solar y todos lso servicios.
-                </p>
-                <p class="card-text">
-                  <small class="text-body-secondary"
-                    >Actualizado hace 5 días</small
-                  >
-                </p>
-                <a href="#" class="btn btn-outline-verde"> Más info </a>
-              </div>
-            </div>
-          </div>
-        </div>
+        </article>
       </div>
     </main>
 
-    <footer class="fp-footer">
-      <div class="container">
+    <footer class="fp-footer py-5 bg-light">
+      <div class="container text-center">
         <h3>Seguinos en</h3>
         <p class="fp-privacy-notice">
-          Seguinos en redes sociales para estar al tanto de las ultimas ofertas,
-          eventos y mucho mas.
+          Seguinos en redes sociales para estar al tanto de las últimas ofertas,
+          eventos y mucho más.
         </p>
-        <br />
-        <div class="fp-social-links">
+        <div class="fp-social-links d-flex justify-content-center gap-3 my-3">
           <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
-          <a href="#"><i class="fab fa-x-twitter"></i>x</a>
+          <a href="#"><i class="fab fa-x-twitter"></i> X</a>
           <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
           <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
         </div>

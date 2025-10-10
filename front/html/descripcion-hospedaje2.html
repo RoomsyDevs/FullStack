@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Casa de campo en La Cumbrecita</title>
+
+    <!-- Fuentes y estilos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" href="../img/logo icono.ico" type="image/ico" />
+  </head>
+
+  <body>
+    <!-- NAV -->
+    <nav>
+      <div class="navegacion">
+        <a href="../index.html">
+          <img src="../img/Logo.png" alt="RoomsyDevs" class="logo-img" />
+        </a>
+        <div class="botones">
+          <a href="galeria.html" class="btn btn-texto">Ver hospedajes</a>
+          <a href="publicar-hospedaje.html" class="btn btn-texto"
+            >Publicar hospedaje</a
+          >
+          <a href="#" class="btn btn-outline-naranja">Iniciar sesión</a>
+          <a href="#" class="btn btn-naranja">Registrarse</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- CARRUSEL -->
+    <section class="container mt-4">
+      <div
+        id="carruselHospedaje"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner rounded-4 shadow-sm">
+          <div class="carousel-item active">
+            <img
+              src="../img/hospedaje2_cumbrecita_1.jpg"
+              class="d-block w-100"
+              alt="Casa en La Cumbrecita"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="../img/hospedaje2_cumbrecita_2.png"
+              class="d-block w-100"
+              alt="Interior del hospedaje"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="../img/hospedaje2_cumbrecita_3.png"
+              class="d-block w-100"
+              alt="Entorno natural"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="../img/hospedaje2_cumbrecita_4.png"
+              class="d-block w-100"
+              alt="Entorno natural"
+            />
+          </div>
+        </div>
+
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carruselHospedaje"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carruselHospedaje"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- MINIATURAS -->
+    <div class="container galeria-miniaturas mt-3 mb-4">
+      <div class="row g-3 justify-content-center">
+        <div class="col-3">
+          <img
+            src="../img/hospedaje2_cumbrecita_1.jpg"
+            class="img-fluid rounded-3 shadow-sm"
+            data-bs-target="#carruselHospedaje"
+            data-bs-slide-to="0"
+            alt="Miniatura 1"
+          />
+        </div>
+        <div class="col-3">
+          <img
+            src="../img/hospedaje2_cumbrecita_2.png"
+            class="img-fluid rounded-3 shadow-sm"
+            data-bs-target="#carruselHospedaje"
+            data-bs-slide-to="1"
+            alt="Miniatura 2"
+          />
+        </div>
+        <div class="col-3">
+          <img
+            src="../img/hospedaje2_cumbrecita_3.png"
+            class="img-fluid rounded-3 shadow-sm"
+            data-bs-target="#carruselHospedaje"
+            data-bs-slide-to="2"
+            alt="Miniatura 3"
+          />
+        </div>
+        <div class="col-3">
+          <img
+            src="../img/hospedaje2_cumbrecita_4.png"
+            class="img-fluid rounded-3 shadow-sm"
+            data-bs-target="#carruselHospedaje"
+            data-bs-slide-to="3"
+            alt="Miniatura 4"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN DESCRIPCIÓN + FORM -->
+    <section class="container seccion-inferior mt-5 mb-5">
+      <div class="row g-4">
+        <!-- Descripción -->
+        <div class="col-lg-8">
+          <div class="descripcion-hospedaje">
+            <div
+              class="titulo-precio d-flex justify-content-between align-items-center flex-wrap"
+            >
+              <h2
+                id="titulo-hospedaje"
+                class="titulo-hospedaje"
+                data-nombre="Casa de campo en La Cumbrecita"
+              >
+                Casa de campo en La Cumbrecita
+              </h2>
+
+              <div class="precio-noche text-end">
+                <div
+                  id="precio-noche"
+                  class="precio-destacado"
+                  data-precio="23500"
+                >
+                  Desde $23.500
+                </div>
+                <div class="precio-subtexto">por noche</div>
+              </div>
+            </div>
+
+            <p class="fecha-lugar">
+              <span id="fecha-hospedaje" class="fecha" data-fecha="2025-10-09">
+                9 oct 2025
+              </span>
+              –
+              <span
+                id="ubicacion-hospedaje"
+                class="ubicacion"
+                data-ubicacion="La Cumbrecita, Córdoba"
+              >
+                La Cumbrecita, Córdoba
+              </span>
+            </p>
+
+            <p
+              id="descripcion-hospedaje"
+              data-descripcion="Hospedaje cercano a arroyos, ubicado en el pueblo. Tiene patio amplio con asador."
+            >
+              Hospedaje cercano a arroyos, ubicado en el pueblo. Tiene patio
+              amplio con asador.
+            </p>
+          </div>
+
+          <div class="datos-hospedaje mt-4">
+            <h3>Datos del alojamiento</h3>
+            <ul>
+              <li data-tipo="Cabaña">Tipo de propiedad: Cabaña</li>
+              <li data-capacidad="4">Capacidad: 4 personas</li>
+              <li data-dormitorios="2">Dormitorios: 2</li>
+              <li data-camas="3">Camas: 3</li>
+              <li data-banos="1">Baños: 1</li>
+            </ul>
+          </div>
+
+          <div class="detalles-hospedaje mt-4">
+            <h3>Detalles del alojamiento</h3>
+            <ul>
+              <li data-checkin="14:00">Check-in: 14:00</li>
+              <li data-checkout="11:00">Check-out: 11:00</li>
+              <li data-politica="Flexible">
+                Política de cancelación: Flexible
+              </li>
+              <li data-mascotas="false">No se permiten mascotas</li>
+              <li data-wifi="true">Wi-Fi</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Anfitrión + Form -->
+        <div class="col-lg-4">
+          <div class="contacto-anfitrion">
+            <div class="d-flex align-items-center mb-3">
+              <img
+                src="../img/anfitrion_pedro.png"
+                alt="Foto del anfitrión"
+                id="foto-anfitrion"
+                class="foto-anfitrion me-3"
+              />
+              <div>
+                <h3 id="nombre-anfitrion" data-nombre="Pedro">Pedro</h3>
+                <p
+                  id="verificacion-anfitrion"
+                  class="mb-0"
+                  data-verificada="true"
+                >
+                  Anfitrión verificado
+                </p>
+                <small
+                  id="ubicacion-anfitrion"
+                  class="text-muted"
+                  data-ubicacion="La Cumbrecita"
+                  >La Cumbrecita</small
+                >
+              </div>
+            </div>
+
+            <form
+              action="https://formsubmit.co/florenciaispc@gmail.com"
+              method="POST"
+            >
+              <input type="hidden" name="_template" value="box" />
+              <input
+                type="hidden"
+                name="_subject"
+                value="Nuevo mensaje desde RoomsyDevs"
+              />
+              <input type="hidden" name="_next" value="gracias.html" />
+
+              <div class="mb-3">
+                <label for="nombre" class="form-label"
+                  >Nombre y Apellido*</label
+                >
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  class="form-control"
+                  required
+                  minlength="10"
+                  maxlength="50"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="email" class="form-label">Email *</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="mensaje" class="form-label">Mensaje *</label>
+                <textarea
+                  id="mensaje"
+                  name="mensaje"
+                  class="form-control"
+                  rows="4"
+                  required
+                  minlength="10"
+                  maxlength="120"
+                >
+Hola! Vi este hospedaje en RoomsyDevs y me gustaría saber más detalles.</textarea
+                >
+              </div>
+
+              <div class="form-check mb-3">
+                <input type="checkbox" name="interes" id="interes" required />
+                <label class="form-check-label" for="interes">
+                  Acepto que RoomsyDevs comparta mis datos con el anfitrión para
+                  establecer contacto.*
+                </label>
+              </div>
+
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-outline-verde">
+                  Contactar
+                </button>
+                <button
+                  type="button"
+                  id="btnTelefono"
+                  class="btn btn-outline-verde"
+                >
+                  Ver teléfono del anfitrión
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="fp-footer py-5 bg-light">
+      <div class="container text-center">
+        <h3>Seguinos en</h3>
+        <p class="fp-privacy-notice">
+          Seguinos en redes sociales para estar al tanto de las últimas ofertas,
+          eventos y mucho más.
+        </p>
+        <div class="fp-social-links d-flex justify-content-center gap-3 my-3">
+          <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+          <a href="#"><i class="fab fa-x-twitter"></i> X</a>
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+          <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+        </div>
+        <p class="fp-copyright">
+          Copyright &copy; 2025 RoomsyDevs. Todos los derechos reservados.
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const btnTelefono = document.getElementById("btnTelefono");
+      let mostrandoTelefono = false;
+
+      btnTelefono.addEventListener("click", () => {
+        if (!mostrandoTelefono) {
+          btnTelefono.classList.remove("btn-outline-success");
+          btnTelefono.classList.add("btn-success");
+          btnTelefono.textContent = "+54 9 1111 1111";
+          mostrandoTelefono = true;
+        } else {
+          btnTelefono.classList.remove("btn-success");
+          btnTelefono.classList.add("btn-outline-success");
+          btnTelefono.textContent = "Ver teléfono del anfitrión";
+          mostrandoTelefono = false;
+        }
+      });
+    </script>
+  </body>
+</html>
