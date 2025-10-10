@@ -1,5 +1,38 @@
 from conexion import conectar
 
+class Usuario:
+    def __init__(self, id=None, nombre=None, apellido=None, email=None, contrasena=None, rol=None, telefono=None):
+        self.__id = id
+        self.__nombre = nombre
+        self.__apellido = apellido
+        self.__email = email
+        self.__contrasena = contrasena
+        self.__rol = rol
+        self.__telefono = telefono
+
+    # --- Encapsulamiento básico ---
+    def get_id(self): return self.__id
+    def get_nombre(self): return self.__nombre
+    def get_rol(self): return self.__rol
+
+    # --- US10: Eliminar usuario (solo Admin) ---
+    def eliminar_usuario(self, id_usuario):
+        conn = conectar()
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM usuarios WHERE id = %s AND rol != 'admin'", (id_usuario,))
+        conn.commit()
+        conn.close()
+        print("Usuario eliminado definitivamente.")
+
+    # --- US11: Eliminar mi propia cuenta ---
+    def eliminar_cuenta(self):
+        conn = conectar()
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM usuarios WHERE id = %s", (self.__id,))
+        conn.commit()
+        conn.close()
+        print("Tu cuenta ha sido eliminada definitivamente.")
+
 class usuario:
     def __init__(self, id, nombre, apellido, email, contrasena, rol, telefono):
         self.id= id
