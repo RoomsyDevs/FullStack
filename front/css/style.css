@@ -330,14 +330,43 @@ footer a:hover {
   color: var(--color-blanco);
 }
 
+/* Formulario INICIO SESION */
+.fp-form-container form {
+  margin-top: 10px;
+}
+
+.fp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fp-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.fp-form-container input[type="text"],
+.fp-form-container input[type="email"],
+.fp-form-container input[type="tel"],
+.fp-form-container input[type="password"],
+.fp-form-container textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--color-gris-medio, #e0e0e0);
+  border-radius: 8px;
+  font-family: var(--fuente-parrafos);
+  font-size: 1.6rem;
+}
+
 /* --- Sección del Formulario --- */
 .fp-form-section {
-  padding: 60px 20px;
+  padding: 30px 20px;
   background-color: #f8f9fa;
 }
 
 .fp-form-container {
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
   background-color: var(--color-blanco);
   padding: 40px;
