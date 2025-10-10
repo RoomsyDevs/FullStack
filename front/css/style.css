@@ -546,33 +546,32 @@ footer a:hover {
 
 .form-check {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  align-items: flex-start;
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
 .contacto-anfitrion .form-check-label {
-  font-size: 1rem; /* antes 0.85rem */
+  font-size: 1rem;
   color: var(--color-subtexto);
-  margin: 0;
+  margin: 0.2rem;
   line-height: 1.5;
 }
 
-/* ✅ Checkbox personalizado */
 input[type="checkbox"] {
   width: 18px;
   height: 18px;
   border-radius: 4px;
   border: 2px solid var(--color-primario);
   background-color: var(--color-blanco);
-  margin-right: 0.5rem;
-  vertical-align: middle;
   appearance: none;
   -webkit-appearance: none;
   position: relative;
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 0 0 1px var(--sombra-primaria);
+  margin-top: 4px;
+  flex-shrink: 0;
 }
 
 input[type="checkbox"]:checked {

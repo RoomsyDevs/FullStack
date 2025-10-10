@@ -49,20 +49,36 @@
     <main>
       <section class="fp-form-section">
         <div class="fp-form-container">
-          <h2>
-            Contanos cómo es tu hospedaje y si tenés alguna duda, Estamos para
-            ayudarte
-          </h2>
+          <h2>Formulario para registrar tu hospedaje en RoomsyDevs</h2>
           <br />
 
-          <form action="#">
+          <form
+            action="https://formsubmit.co/florenciaispc@gmail.com"
+            method="POST"
+          >
+            <!-- Campos ocultos de configuración -->
+            <input type="hidden" name="_template" value="box" />
+            <input
+              type="hidden"
+              name="_subject"
+              value="Solicitud de contacto desde RoomsyDevs"
+            />
+            <input
+              type="hidden"
+              name="_next"
+              value="https://roomsydevs.netlify.app/html/gracias-roomsy"
+            />
+
             <div class="fp-form-row">
               <div class="fp-form-group">
                 <input
                   type="text"
                   id="nombre"
                   name="nombre"
+                  class="form-control"
                   placeholder="Nombre *"
+                  minlength="3"
+                  maxlength="20"
                   required
                 />
               </div>
@@ -71,17 +87,22 @@
                   type="text"
                   id="apellido"
                   name="apellido"
+                  class="form-control"
                   placeholder="Apellido *"
+                  minlength="3"
+                  maxlength="20"
                   required
                 />
               </div>
             </div>
+
             <div class="fp-form-row">
               <div class="fp-form-group">
                 <input
                   type="email"
                   id="email"
                   name="email"
+                  class="form-control"
                   placeholder="Email *"
                   required
                 />
@@ -91,20 +112,36 @@
                   type="tel"
                   id="telefono"
                   name="telefono"
+                  class="form-control"
                   placeholder="Teléfono *"
                   required
                 />
               </div>
             </div>
+
             <div class="fp-form-group">
               <textarea
                 id="mensaje"
                 name="mensaje"
+                class="form-control"
                 rows="6"
-                placeholder="Mensaje *"
+                placeholder="Contanos cómo es tu hospedaje, qué lo hace especial y qué te gustaría transmitir a quienes lo visitan. Si tenés dudas sobre el proceso o querés saber más, también podés escribirlo acá. Estamos para ayudarte."
                 required
+                minlength="20"
+                maxlength="120"
               ></textarea>
             </div>
+
+            <div class="form-check mb-3">
+              <input type="checkbox" id="interes" required />
+              <label class="form-check-label" for="interes">
+                Al enviar este formulario, aceptás que RoomsyDevs utilice esta
+                información para publicar tu hospedaje y facilitar el contacto
+                con potenciales visitantes. Más info en nuestra Política de
+                Privacidad.
+              </label>
+            </div>
+
             <button
               type="submit"
               class="fp-btn btn-naranja"
@@ -113,11 +150,6 @@
               Enviar
             </button>
           </form>
-          <p class="fp-privacy-notice">
-            Al enviar este formulario, aceptás que RoomsyDevs utilice esta
-            información para publicar tu hospedaje y facilitar el contacto con
-            potenciales visitantes. Más info en nuestra Política de Privacidad.
-          </p>
         </div>
       </section>
     </main>
