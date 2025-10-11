@@ -330,6 +330,12 @@ footer a:hover {
   color: var(--color-blanco);
 }
 
+.fp-btn.btn-naranja {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+}
+
 /* Formulario INICIO SESION */
 .fp-form-container form {
   margin-top: 10px;
