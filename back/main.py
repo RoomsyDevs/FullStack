@@ -176,12 +176,20 @@ def main():
 
         elif opcion == '2':
             print("\n<<< Iniciar sesión >>>")
-            email = input("Email: ").strip()
-            contrasena = Auth.validar_contrasena()
-            usuario_login = usuario.iniciar_sesion(email, contrasena)
-
+            email = Auth.validar_email()
+            intentos = 0
+            usuario_login = None
+            
+            while intentos < 3 and not usuario_login:
+                contrasena = input("Contraseña: ").strip()
+                usuario_login = usuario.iniciar_sesion(email, contrasena)
+                if not usuario_login:
+                    intentos += 1
+                    print("Usuario o contraseña incorrecta, intente de nuevo.")
             if not usuario_login:
-                print("Usuario o contraseña incorrectos.")
+                print("Se alcanzó el limite de intentos, volviendo al menú.")
+                continue
+
             elif usuario:
                 if usuario_login.rol == "anfitrion":
                     menu_anfitrion(usuario_login)

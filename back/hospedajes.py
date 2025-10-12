@@ -107,9 +107,11 @@ class hospedaje:
         conn = conectar()
         cursor = conn.cursor(dictionary=True)
         cursor.execute("""
-        SELECT titulo, descripcion, precio_por_noche, disponible
-        FROM hospedajes
-        WHERE disponible = 1
+        SELECT h.titulo, h.descripcion, h.precio_por_noche, h.disponible,
+        u.ciudad, u.provincia
+        FROM hospedajes h
+        JOIN ubicaciones u ON h.ubicacion_id = u.id
+        WHERE h.disponible = 1
         """)
         hospedajes = cursor.fetchall()
         conn.close()
@@ -121,6 +123,7 @@ class hospedaje:
             for i, h in enumerate(hospedajes, 1):
                 print(f"{i}. {h['titulo']} (${h['precio_por_noche']}/noche)")
                 print(f"{h['descripcion']}")
+                print(f"{h['ciudad']}, {h['provincia']}\n")
 
     @classmethod
     def disponibilidad_hospedaje(cls, usuario):
