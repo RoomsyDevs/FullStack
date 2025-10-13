@@ -1,6 +1,6 @@
 # RoomsyDevs — Plataforma de turismo y hospedaje con identidad local
 
-**Grupo 17 — Proyecto Integrador | Tecnicatura Superior en Desarrollo Web y Aplicaciones Digitales**
+**Grupo 17 — Proyecto Integrador | Módulo Fullstack | Tecnicatura Superior en Desarrollo Web y Aplicaciones Digitales**
 
 **Integrantes:**
 - Martín Ignacio Bentivoglio
