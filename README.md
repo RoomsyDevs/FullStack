@@ -41,6 +41,16 @@ RoomsyDevs busca revertir esta situación con:
 - Gestión de roles diferenciados (turista, anfitrión, administrador).
 - Visualización responsive desde dispositivos móviles.
 
+---
+
+#### Funcionalidades Clave Adicionales
+
+- Página de inicio y vista de detalle: Además de la galería, los usuarios pueden ver una página de bienvenida y una vista detallada de cada hospedaje.
+- Gestión del ciclo de vida del hospedaje: Los anfitriones pueden pausar o eliminar sus publicaciones.
+- Gestión de la cuenta por el usuario: Los usuarios pueden modificar sus datos personales y eliminar su propia cuenta.
+- Gestión de usuarios por el administrador: Los administradores tienen la capacidad de eliminar cuentas de usuario.
+- Seguridad de acceso: Se ha implementado un límite de intentos de inicio de sesión para proteger las cuentas.
+
 > **Importante:** No se incluye gestión automatizada de reservas ni pasarela de pagos en el MVP. Las reservas se gestionan directamente entre turista y anfitrión.
 
 ---
