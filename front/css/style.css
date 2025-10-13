@@ -1,17 +1,33 @@
 :root {
+  /* === Tipografías === */
   --fuente-heading: "Merriweather Sans", sans-serif;
   --fuente-parrafos: "Open Sans", sans-serif;
 
+  /* === Colores principales === */
   --color-primario: #2e7d32;
   --color-acento: #f66b00;
+  --color-acento-hover: #e05f00;
   --color-blanco: #ffffff;
   --color-negro: #000000;
-  --color-fondo: #f8f9fa;
 
-    /* === VARIABLES AÑADIDAS PARA EL MÓDULO DEL FORMULARIO === */
-    --color-texto: #333333;
-    --color-gris-medio: #e0e0e0;
-    --color-gris-oscuro: #666666;
+  /* === Escalas de grises y textos === */
+  --color-texto: #333333;
+  --color-subtexto: #777777;
+  --color-gris-medio: #e0e0e0;
+  --color-gris-oscuro: #666666;
+
+  /* === Fondos y sombras === */
+  --color-fondo: #f8f9fa;
+  --fondo-principal: #f8f9fa;
+  --fondo-suave: #eaf5e5;
+  --borde-suave: #ccc;
+  --sombra-suave: rgba(0, 0, 0, 0.08);
+  --sombra-primaria: rgba(46, 125, 50, 0.2);
+  --sombra-primaria-activa: rgba(46, 125, 50, 0.3);
+
+  /* === Overlays === */
+  --overlay-principal: rgba(0, 0, 0, 0.5);
+  --overlay-secundario: rgba(0, 0, 0, 0.4);
 }
 
 /* Estructura general */
@@ -29,19 +45,9 @@ body {
   font-family: var(--fuente-parrafos);
   font-size: 1.6rem;
   line-height: 1.6;
-  margin: 0;
+  margin: 16px;
   padding: 0;
 }
-
-/* ---- Esto por ahora mientras estamos trabajando en las pags
-.en-construccion h2 {
-  text-align: center;
-  font-size: 2.4rem;
-  font-family: var(--fuente-heading);
-  margin-bottom: 1rem;
-}
-
-*/
 
 /* Títulos */
 .titulo-principal,
@@ -140,43 +146,6 @@ body {
   color: var(--color-blanco);
 }
 
-/* banner */
-.contenedor {
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.banner {
-  position: relative;
-  height: 30rem;
-  background-image: url("../img/hospedaje-6.jpg");
-  background-size: cover;
-  background-position: center;
-  border-radius: 2rem;
-  display: flex;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.banner-overlay {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 2rem;
-}
-
-.banner-contenido {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
 .banner-texto {
   color: var(--color-blanco);
 }
@@ -197,11 +166,19 @@ body {
   background-color: var(--color-blanco);
   border-radius: 1rem;
   overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.hospedaje-card:hover {
+  transform: scale(1.01);
+  box-shadow: var(--sombra-primaria);
 }
 
 .hospedaje-img {
   height: 100%;
   object-fit: cover;
+  width: 100%;
   border-radius: 0;
 }
 
@@ -213,10 +190,6 @@ body {
 }
 /* Responsive */
 @media (max-width: 768px) {
-  .banner-contenido {
-    padding: 2rem;
-    text-align: center;
-  }
   .titulo-principal {
     font-size: 2rem;
   }
@@ -251,129 +224,95 @@ body {
   }
 }
 
-
 /* =========================
    HERO
 ========================= */
 .hero {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 40px;
-    height: 70vh;
-    border-radius: 15px;
-    color: white;
-    background: 
-        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url("../img/hero.jpeg") center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 2rem;
+  height: 50vh;
+  border-radius: 15px;
+  color: white;
+  margin: 0 auto;
+  max-width: 1300px;
+
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../img/hero.jpeg") center/cover no-repeat;
+}
+
+.hero--galeria {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../img/hero-galeria.png") center/cover no-repeat;
+}
+
+.hero--formulario {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../img/hero-publicarHospedaje.jpeg") center/cover no-repeat;
 }
 
 .hero-text p {
-    color: white; /* texto “Territorio, descanso, vínculo” en blanco */
+  color: white; /* texto “Territorio, descanso, vínculo” en blanco */
 }
 
 .search-bar {
-    border: none;
-    border-radius: 25px;
-    padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 20px;
 }
 
 .btn-orange {
-    background-color: #f66b00;
-    color: white;
-    border-radius: 25px;
-    padding: 8px 20px;
-    transition: background-color 0.3s;
+  background-color: #f66b00;
+  color: white;
+  border-radius: 25px;
+  padding: 8px 20px;
+  transition: background-color 0.3s;
 }
 
 .btn-orange:hover {
-    background-color: #ea580c;
+  background-color: #c14a0b;
 }
 
 /* =========================
    BANNER 3 COLUMNAS
 ========================= */
 section h2 {
-    color: #1f2937;
+  color: #1f2937;
 }
 
 section h5 {
-    color: #f97316;
+  color: #f97316;
 }
 
 section p {
-    color: #374151;
+  color: #374151;
 }
-
 
 /* =========================
    GRILLA 4 HOSPEDAJES
 ========================= */
 .card-img-top {
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
 }
 
 .card {
-    border: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
-
-.carousel-caption h5,
-.carousel-caption p {
-    background-color: rgba(0,0,0,0.5);
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-
 
 /* =========================
    FOOTER
 ========================= */
 footer a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 footer a:hover {
-    color: #f97316;
-}
-
-/* ========================================================== */
-/* === MÓDULO DE ESTILOS PARA PÁGINA DE FORMULARIO (fp-) === */
-/* ========================================================== */
-
-
-/* --- Encabezado del Formulario (fp-header) --- */
-.fp-header {
-  background-color: var(--color-blanco);
-  padding: 15px 0;
-}
-
-.fp-header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.fp-logo {
-  text-decoration: none;
-  color: var(--color-acento-naranja); 
-  font-size: 2.8rem;
-  font-weight: 700;
-}
-
-.fp-logo-devs {
-  color: var(--color-texto); 
-  font-weight: 600;
-}
-
-.fp-header-buttons {
-  display: flex;
-  gap: 15px;
+  color: #f97316;
 }
 
 /* --- Botones específicos del formulario --- */
@@ -386,68 +325,54 @@ footer a:hover {
   text-align: center;
 }
 
-.fp-btn-primary {
-  background-color: var(--color-acento-naranja);
-  color: var(--color-primario);
-  border: 2px solid var(--color-acento-naranja);
-}
-
-.fp-btn-primary:hover {
-  background-color: #e0701a;
-}
-
-.fp-btn-outline {
-  border: 2px solid var(--color-acento-naranja);
-  color: var(--color-acento-naranja);
-  background-color: transparent;
-}
-
 .fp-btn-outline:hover {
-  background-color: var(--color-acento-naranja);
+  background-color: var(--color-negro);
   color: var(--color-blanco);
 }
 
+.fp-btn.btn-naranja {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+}
 
-/* --- Sección Hero del Formulario (fp-hero) --- */
-.fp-hero {
-  margin: 40px auto;
-  max-width: 1200px;
-  height: 500px;
-  background-image:url("../img/hero-background.jpeg"); 
-  background-size: cover;
-  background-position: center;
-  border-radius: 20px;
+/* Formulario INICIO SESION */
+.fp-form-container form {
+  margin-top: 10px;
+}
+
+.fp-form {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  color: var(--color-blanco);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  padding: 40px;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.fp-hero-content {
-  max-width: 700px;
+.fp-form-group {
+  display: flex;
+  flex-direction: column;
 }
 
-.fp-hero h1 {
-  font-size: 4.5rem;
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-.fp-hero p {
+.fp-form-container input[type="text"],
+.fp-form-container input[type="email"],
+.fp-form-container input[type="tel"],
+.fp-form-container input[type="password"],
+.fp-form-container textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--color-gris-medio, #e0e0e0);
+  border-radius: 8px;
+  font-family: var(--fuente-parrafos);
   font-size: 1.6rem;
-  color: var(--color-blanco);
 }
 
 /* --- Sección del Formulario --- */
 .fp-form-section {
-  padding: 60px 20px;
-  background-color: #f8f9fa; 
+  padding: 30px 20px;
+  background-color: #f8f9fa;
 }
 
 .fp-form-container {
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
   background-color: var(--color-blanco);
   padding: 40px;
@@ -478,16 +403,16 @@ footer a:hover {
 .fp-form-container textarea {
   width: 100%;
   padding: 15px;
-  border: 1px solid var(--color-gris-medio, #e0e0e0); 
+  border: 1px solid var(--color-gris-medio, #e0e0e0);
   border-radius: 8px;
   font-family: var(--fuente-parrafos);
   font-size: 1.6rem;
 }
 
-.fp-form-container input:focus, 
+.fp-form-container input:focus,
 .fp-form-container textarea:focus {
   outline: none;
-  border-color: var(--color-acento-naranja);
+  border-color: var(--color-acento);
   box-shadow: 0 0 5px rgba(245, 132, 40, 0.5);
 }
 
@@ -500,6 +425,7 @@ footer a:hover {
 .fp-footer h3 {
   margin-bottom: 20px;
   font-size: 2.2rem;
+  font-weight: 600;
 }
 
 .fp-social-links {
@@ -540,31 +466,193 @@ footer a:hover {
   color: var(--color-gris-oscuro, #666);
 }
 
-/* --- Media Queries para el Módulo de Formulario --- */
-@media (max-width: 992px) {
-  .fp-header .container {
-      flex-direction: column;
-      gap: 15px;
+.tarjeta-horizontal {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--color-blanco);
+  box-shadow: 0 2px 8px var(--sombra-suave);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: row;
+  height: 300px;
+  gap: 0.5rem;
+}
+
+.tarjeta-horizontal:hover {
+  transform: scale(1.02);
+}
+
+.tarjeta-horizontal > img.card-img-left {
+  width: 45%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px 0 0 12px;
+}
+
+.tarjeta-horizontal .card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 55%;
+  overflow: hidden;
+  gap: 0.4rem;
+}
+
+.card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-negro);
+}
+
+.card-precio {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--color-acento);
+}
+
+#carruselHospedaje .carousel-inner img {
+  width: 100%;
+  height: 650px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+.galeria-miniaturas {
+  margin-top: 1rem;
+}
+
+.galeria-miniaturas img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.2s ease, outline 0.2s ease;
+}
+
+.galeria-miniaturas img:hover {
+  transform: scale(1.04);
+  outline: 2px solid var(--color-primario);
+  outline-offset: 2px;
+}
+
+.titulo-hospedaje {
+  font-family: var(--fuente-heading);
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--color-primario);
+}
+
+.contacto-anfitrion {
+  background-color: var(--fondo-suave);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 10px rgba(62, 62, 62, 0.233);
+}
+
+.contacto-anfitrion h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-primario);
+  margin-bottom: 0.5rem;
+}
+
+.contacto-anfitrion input,
+.contacto-anfitrion textarea {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--borde-suave);
+  border-radius: 8px;
+  font-size: 1.5rem;
+}
+
+.foto-anfitrion {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 3px solid var(--color-primario);
+}
+
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.contacto-anfitrion .form-check-label {
+  font-size: 1rem;
+  color: var(--color-subtexto);
+  margin: 0.2rem;
+  line-height: 1.5;
+}
+
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 2px solid var(--color-primario);
+  background-color: var(--color-blanco);
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 0 1px var(--sombra-primaria);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--color-primario);
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 2px var(--sombra-primaria-activa);
+}
+
+input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 9px;
+  border: solid var(--color-blanco);
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+@media (max-width: 505px) {
+  .tarjeta-horizontal {
+    flex-direction: column !important;
+    height: auto;
+  }
+
+  .tarjeta-horizontal > img.card-img-left {
+    width: 100%;
+    height: auto;
+    max-height: 240px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .tarjeta-horizontal .card-body {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .tarjeta-horizontal .btn {
+    width: 100%;
+    margin-top: 1rem;
   }
 }
 
 @media (max-width: 768px) {
-  .fp-hero {
-      height: auto;
-      padding: 60px 20px;
-      text-align: center;
-  }
-
-  .fp-hero h1 {
-      font-size: 3.6rem;
-  }
-
-  .fp-form-row {
-      flex-direction: column;
-      margin-bottom: 0;
-  }
-
-  .fp-form-row .fp-form-group {
-      margin-bottom: 20px;
+  #carruselHospedaje .carousel-inner img {
+    height: 300px;
   }
 }

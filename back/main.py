@@ -1,42 +1,73 @@
-from usuarios import registrar_usuario, iniciar_sesion, modificar_usuario, eliminar_usuario, mostrar_usuarios, modificar_cuenta, eliminar_cuenta
-from hospedajes import registrar_hospedaje, mostrar_hospedaje_registrado, eliminar_hospedaje, mostrar_hospedaje
-from auth import validar_email_unico, validar_contrasena, validar_rol, validar_username_unico, validar_telefono
+from usuarios import admin, usuario
+from hospedajes import hospedaje
+from validaciones import Auth
 from conexion import conectar
 
+
 def menu_anfitrion(usuario):
+    auth = Auth()
     while True:
         print("\n<<< Menú Anfitrión >>>")
         print("1. Registrar hospedaje")
         print("2. Ver hospedajes publicados")
-        print("3. Eliminar hospedaje")
-        print("4. Editar usuario")
-        print("5. Eliminar cuenta")
-        print("6. Cerrar sesión")
+        print("3. Cambiar disponibilidad de hospedaje")
+        print("4. Eliminar hospedaje")
+        print("5. Editar usuario")
+        print("6. Eliminar cuenta")
+        print("7. Cerrar sesión")
 
         opcion = input("Seleccionar una opción: ").strip()
 
         if opcion == '1':
-            registrar_hospedaje(usuario)
+            titulo = input("Titulo: ").strip()
+            precio_por_noche = auth.validar_precio()
+            descripcion = input("Descripción: ").strip()
+            ciudad = input("Ciudad del hospedaje: ").strip()
+            provincia = input("Provincia: ").strip()
+            capacidad = int(input("Capacidad máxima del hospedaje: ").strip())
+
+
+            hospedaje.registrar_hospedaje(
+            anfitrion_id = usuario.id,
+            titulo = titulo,
+            precio_por_noche = precio_por_noche,
+            descripcion = descripcion,
+            ciudad = ciudad,
+            provincia = provincia,
+            capacidad = capacidad
+            )
         elif opcion == '2':
-            mostrar_hospedaje_registrado(usuario)
+            hospedaje.mostrar_hospedaje_registrado(usuario)
         elif opcion == '3':
-            eliminar_hospedaje(usuario)
+            hospedaje.disponibilidad_hospedaje(usuario)
         elif opcion == '4':
+            hospedaje.eliminar_hospedaje(usuario)
+        elif opcion == '5':
             nuevo_nombre = input("Nuevo nombre: ").strip()
             nuevo_apellido = input("Nuevo apellido: ").strip()
-            nuevo_telefono = validar_telefono()
-            nueva_contrasena = validar_contrasena()
+            nuevo_telefono = Auth.validar_telefono()
+            nueva_contrasena = Auth.validar_contrasena()
 
-            modificar_cuenta(usuario, nuevo_nombre, nuevo_apellido, nuevo_telefono, nueva_contrasena)
+            usuario.modificar_cuenta(nuevo_nombre, nuevo_apellido, nuevo_telefono, nueva_contrasena)
+            print("\nUsuario modificado con éxito.")
 
-        elif opcion == '5':
-            if eliminar_cuenta(usuario):
-                break
         elif opcion == '6':
+                confirmacion = input("¿Estás seguro de que querés eliminar tu cuenta? Esta acción es irreversible (s/n): ").strip().lower()
+                if confirmacion == 's':
+                    if usuario.eliminar_cuenta():
+                        print("Cerrando sesión...")
+                    break
+                elif confirmacion == 'n':
+                    print("Operación cancelada.")
+                else:
+                    print("Opción inválida. Por favor ingresá 's' o 'n'.")
+        elif opcion == '7':
             print("Su sesión finalizó con éxito.")
             break
         else:
             print("Opción inválida, intente nuevamente.")
+
+
 def menu_turista(usuario):
     while True:
         print("\n<<< Menú Turista >>>")
@@ -48,18 +79,24 @@ def menu_turista(usuario):
         opcion = input("Ingrese el número de la opción: ").strip()
 
         if opcion == '1':
-            mostrar_hospedaje()
+            hospedaje.mostrar_hospedaje()
         elif opcion == '2':
             nuevo_nombre = input("Nuevo nombre: ").strip()
             nuevo_apellido = input("Nuevo apellido: ").strip()
-            nuevo_telefono = validar_telefono()
-            nueva_contrasena = validar_contrasena()
-
-            modificar_cuenta(usuario, nuevo_nombre, nuevo_apellido, nuevo_telefono, nueva_contrasena)
+            nuevo_telefono = Auth.validar_telefono()
+            nueva_contrasena = Auth.validar_contrasena()
+            usuario.modificar_cuenta(nuevo_nombre, nuevo_apellido, nuevo_telefono, nueva_contrasena)
 
         elif opcion == '3':
-            if eliminar_cuenta(usuario):
-                break
+                confirmacion = input("¿Estás seguro de que querés eliminar tu cuenta? Esta acción es irreversible (s/n): ").strip().lower()
+                if confirmacion == 's':
+                    if usuario.eliminar_cuenta():
+                        print("Cerrando sesión...")
+                    break
+                elif confirmacion == 'n':
+                    print("Operación cancelada.")
+                else:
+                    print("Opción inválida. Por favor ingresá 's' o 'n'.")
         elif opcion == '4':
             print("Sesión finalizada.")
             break
@@ -71,11 +108,10 @@ def menu_admin(usuario):
         print("\n<<< Menú Administrador >>>")
         print("1. Crear cuenta admin")
         print("2. Eliminar usuario")
-        print("3. Eliminar hospedaje")
-        print("4. Ver usuarios")
-        print("5. Ver hospedajes")
-        print("6. Modificar usuario (No puede ser admin)")
-        print("7. Cerrar sesión")
+        print("3. Ver usuarios")
+        print("4. Ver hospedajes")
+        print("5. Modificar usuario (No puede ser admin)")
+        print("6. Cerrar sesión")
 
         opcion = input("Seleccionar una opción: ").strip()
 
@@ -83,50 +119,48 @@ def menu_admin(usuario):
             print("\n<<< Crear cuenta admin >>>")
             nombre = input("Nombre: ").strip()
             apellido = input("Apellido: ").strip()
-            email = validar_email_unico()
-            contrasena = validar_contrasena()
-            username = validar_username_unico()
-            registrar_usuario(nombre, apellido, email, contrasena, "N/A", "admin", username)
+            email = Auth().validar_email_unico()
+            contrasena = Auth.validar_contrasena()
+            username = Auth().validar_username_unico()
+            usuario.crear_admin(nombre, apellido, email, contrasena, "admin", username)
             print("Cuenta administrador creada con éxito!!")
         
         elif opcion == '2':
+            admin.mostrar_usuarios()
             id_usuario = int(input("Elija el número de id del usuario a eliminar: "))
-            eliminar_usuario(id_usuario)
+            confirmacion = input("¿Estás seguro de que querés eliminar tu cuenta? Esta acción es irreversible (s/n): ").strip().lower()
+            if confirmacion == 's':
+                if admin.eliminar_usuario(id_usuario):
+                    print("Usuario eliminado con éxito.")
+            elif confirmacion == 'n':
+                print("Operación cancelada.")
         elif opcion == '3':
-            eliminar_hospedaje(usuario)
+            admin.mostrar_usuarios()
         elif opcion == '4':
-            mostrar_usuarios()
+            hospedaje.mostrar_hospedaje()
         elif opcion == '5':
-            mostrar_hospedaje()
-        elif opcion == '6':
-            id_usuario = int(input("Elija el número de id del usuario a modificar: ").strip())
-            
-            conn = conectar()
-            cursor = conn.cursor(dictionary=True)
-            cursor.execute("SELECT * FROM usuarios WHERE id = %s AND estado = 1", (id_usuario,))
-            usuario_modificable = cursor.fetchone()
+            admin.mostrar_usuarios()
+            id_usuario = int(input("Elija el número de id del usuario a modificar: "))
 
-            if usuario_modificable and usuario_modificable["rol"] != "admin":
+            if not Auth.es_modificable(id_usuario):
+                continue
+            else:
                 nuevo_nombre = input("Nuevo nombre: ").strip()
                 nuevo_apellido = input("Nuevo apellido: ").strip()
-                nuevo_telefono = validar_telefono()
-                nueva_contrasena = validar_contrasena()
+                nuevo_telefono = Auth.validar_telefono()
+                nueva_contrasena = Auth.validar_contrasena()
+                nuevo_rol = Auth.validar_rol()
 
-                modificar_usuario(id_usuario, nuevo_nombre, nuevo_apellido, nuevo_telefono, nueva_contrasena)
-                print("Usuario modificado con éxito.")
-            else:
-                print("No se puede modificar a un usuario administrador.")
-
-            conn.close()
-
-        elif opcion == '7':
-            print("Su sesión finalizó con éxito.")
+                admin.modificar_usuario(id_usuario, nuevo_nombre, nuevo_apellido, nuevo_telefono, nueva_contrasena, nuevo_rol)
+        
+        elif opcion == '6':
+            print ("Cerrando sesión...")
             break
-        else:
-            print("Error, por favor ingrese una opción válida.")
+
 
 def main():
     print("<<< Bienvenidos a RoomsyDevs >>>")
+    auth = Auth()
 
     while True:
         print("\nElegir una opción:")
@@ -138,42 +172,38 @@ def main():
         opcion = input("Ingrese el número de la opción: ").strip()
 
         if opcion == '1':
-            print("\n<<< Registro de nuevo usuario >>>")
-            nombre = input("Nombre: ").strip()
-            apellido = input("Apellido: ").strip()
-            email = validar_email_unico()
-            contrasena = validar_contrasena()
-            telefono = input("Teléfono (Sin el +54): ").strip()
-            rol = validar_rol()
-
-            if rol == "admin":
-                username = validar_username_unico()
-                registrar_usuario(nombre, apellido, email, contrasena, telefono, rol, username)
-            else:
-                registrar_usuario(nombre, apellido, email, contrasena, telefono, rol)
-
-            print("Usuario registrado con éxito.")
+            registrar_usuario_input(auth)
 
         elif opcion == '2':
             print("\n<<< Iniciar sesión >>>")
-            email = input("Email: ").strip()
-            contrasena = input("Contraseña: ").strip()
-            usuario = iniciar_sesion(email, contrasena)
+            email = Auth.validar_email()
+            intentos = 0
+            usuario_login = None
+            
+            while intentos < 3 and not usuario_login:
+                contrasena = input("Contraseña: ").strip()
+                usuario_login = usuario.iniciar_sesion(email, contrasena)
+                if not usuario_login:
+                    intentos += 1
+                    print("Usuario o contraseña incorrecta, intente de nuevo.")
+            if not usuario_login:
+                print("Se alcanzó el limite de intentos, volviendo al menú.")
+                continue
 
-            if usuario:
-                if usuario.rol == "anfitrion":
-                    menu_anfitrion(usuario)
-                elif usuario.rol == "turista":
-                    menu_turista(usuario)
-                elif usuario.rol == "admin":
-                    menu_admin(usuario)
+            elif usuario:
+                if usuario_login.rol == "anfitrion":
+                    menu_anfitrion(usuario_login)
+                elif usuario_login.rol == "turista":
+                    menu_turista(usuario_login)
+                elif usuario_login.rol == "admin":
+                    menu_admin(usuario_login)
                 else:
                     print("Rol desconocido.")
             else:
                 print("No se pudo iniciar sesión.")
 
         elif opcion == '3':
-            mostrar_hospedaje()
+            hospedaje.mostrar_hospedaje()
 
         elif opcion == '4':
             print("Saliendo del programa...")
@@ -183,6 +213,21 @@ def main():
             print("Opción inválida. Intente nuevamente.")
 
     print("Programa finalizado. ¡Gracias por usar RoomsyDevs!")
+
+def registrar_usuario_input(auth):
+    print("\n<<< Registro de nuevo usuario >>>")
+    nombre = input("Nombre: ").strip()
+    apellido = input("Apellido: ").strip()
+    email = Auth.validar_email_unico()
+    contrasena = Auth.validar_contrasena()
+    telefono = Auth.validar_telefono()
+    rol = Auth.validar_rol()
+    if rol == "admin":
+        username = Auth.validar_username_unico()
+        admin.crear_admin(nombre, apellido, email, contrasena, telefono, rol, username)
+    else:
+        usuario.registrar_usuario(nombre, apellido, email, contrasena, telefono, rol)
+    print("Usuario registrado con éxito.") 
 
 if __name__ == "__main__":
     main()
