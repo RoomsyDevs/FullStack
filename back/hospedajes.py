@@ -56,7 +56,7 @@ class hospedaje:
         cursor.execute("""
             SELECT id, titulo, descripcion, precio_por_noche
             FROM hospedajes
-            WHERE anfitrion_id = %s AND activo = 1
+            WHERE anfitrion_id = %s AND disponible = 1
         """, (usuario.id,))
         hospedajes = cursor.fetchall()
         conn.close()
