@@ -34,83 +34,88 @@
           <a href="iniciar-sesion.html" class="btn btn-outline-naranja"
             >Iniciar sesión</a
           >
-         <a href="/html/registro.html" class="btn btn-naranja">Registrarse</a>
+          <a href="/html/registro.html" class="btn btn-naranja">Registrarse</a>
         </div>
       </div>
     </nav>
 
-    
     <main>
-  <section class="fp-form-section">
-    <div class="fp-form-container">
-      <h2>Registrate en RoomsyDevs</h2>
-      <br />
-      <form id="registerForm" class="fp-form">
-        <!-- Nombre -->
-        <div class="fp-form-group">
-          <input
-            type="text"
-            id="userName"
-            name="name"
-            class="form-control"
-            placeholder="Nombre completo *"
-            required
-          />
+      <section class="fp-form-section">
+        <div class="fp-form-container">
+          <h2>Registrate en RoomsyDevs</h2>
+          <br />
+          <form id="registerForm" class="fp-form">
+            <!-- Nombre -->
+            <div class="fp-form-group">
+              <input
+                type="text"
+                id="userName"
+                name="name"
+                class="form-control"
+                placeholder="Nombre completo *"
+                required
+                minlength="5"
+                maxlength="40"
+              />
+            </div>
+
+            <!-- Correo -->
+            <div class="fp-form-group">
+              <input
+                type="email"
+                id="userEmail"
+                name="email"
+                class="form-control"
+                placeholder="Correo electrónico *"
+                minlength="8"
+                maxlength="50"
+                required
+              />
+            </div>
+
+            <!-- Contraseña -->
+            <div class="fp-form-group">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                placeholder="Contraseña *"
+                minlength="6"
+                maxlength="30"
+                required
+              />
+            </div>
+
+            <!-- Confirmar contraseña -->
+            <div class="fp-form-group">
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                class="form-control"
+                placeholder="Repetir contraseña *"
+                minlength="6"
+                maxlength="30"
+                required
+              />
+            </div>
+
+            <!-- Botón -->
+            <button
+              type="submit"
+              class="fp-btn btn-naranja"
+              style="width: 100%; padding: 15px; font-size: 18px"
+            >
+              Registrarme
+            </button>
+
+            <!-- Mensajes -->
+            <p id="message" class="error-message"></p>
+          </form>
         </div>
-
-        <!-- Correo -->
-        <div class="fp-form-group">
-          <input
-            type="email"
-            id="userEmail"
-            name="email"
-            class="form-control"
-            placeholder="Correo electrónico *"
-            required
-          />
-        </div>
-
-        <!-- Contraseña -->
-        <div class="fp-form-group">
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control"
-            placeholder="Contraseña *"
-            minlength="6"
-            required
-          />
-        </div>
-
-        <!-- Confirmar contraseña -->
-        <div class="fp-form-group">
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            class="form-control"
-            placeholder="Repetir contraseña *"
-            minlength="6"
-            required
-          />
-        </div>
-
-        <!-- Botón -->
-        <button
-          type="submit"
-          class="fp-btn btn-naranja"
-          style="width: 100%; padding: 15px; font-size: 18px"
-        >
-          Registrarme
-        </button>
-
-        <!-- Mensajes -->
-        <p id="message" class="error-message"></p>
-      </form>
-    </div>
-  </section>
-</main>
+      </section>
+    </main>
 
     <footer class="fp-footer">
       <div class="container">
