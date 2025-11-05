@@ -392,10 +392,6 @@ footer a:hover {
   margin-bottom: 20px;
 }
 
-.fp-form-group {
-  flex: 1;
-}
-
 /* Estilos para inputs dentro del formulario fp */
 .fp-form-container input[type="text"],
 .fp-form-container input[type="email"],
