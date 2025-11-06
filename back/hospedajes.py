@@ -131,7 +131,7 @@ class hospedaje:
         cursor = conn.cursor(dictionary=True)
         cursor.execute("""
         SELECT id, titulo, disponible FROM hospedajes
-        WHERE anfitrion_id = %s AND disponible = 1
+        WHERE anfitrion_id = %s
         """, (usuario.id,))
         hospedajes = cursor.fetchall()
 
