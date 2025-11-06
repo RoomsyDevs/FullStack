@@ -113,7 +113,8 @@ class admin(usuario):
         super().__init__(id, nombre, apellido, email, contrasena, "admin", telefono="N/A")
         self.username = username
 
-    def crear_admin(self, nombre, apellido, email, contrasena, rol, username):
+    @classmethod
+    def crear_admin(cls, nombre, apellido, email, contrasena, rol, username):
         conn = conectar()
         cursor = conn.cursor()
         cursor.execute("""
@@ -141,6 +142,7 @@ class admin(usuario):
 
         conn.close()
 
+    @staticmethod
     def modificar_usuario(id_usuario, nuevo_nombre, nuevo_apellido, nuevo_telefono, nueva_contrasena, nuevo_rol):
         conn = conectar()
         cursor = conn.cursor(dictionary=True)

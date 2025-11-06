@@ -49,8 +49,8 @@ class hospedaje:
         conn.close()
         print("\nHospedaje registrado correctamente.")
 
-    @classmethod
-    def mostrar_hospedaje_registrado(cls, usuario):
+    @staticmethod
+    def mostrar_hospedaje_registrado(usuario):
         conn = conectar()
         cursor = conn.cursor(dictionary=True)
         cursor.execute("""
@@ -69,8 +69,8 @@ class hospedaje:
                 print(f"{i}. {h['titulo']} {h['descripcion']} (${h['precio_por_noche']}/noche)")
         conn.close()
 
-    @classmethod
-    def eliminar_hospedaje(cls, usuario):
+    @staticmethod
+    def eliminar_hospedaje(usuario):
         conn = conectar()
         cursor = conn.cursor(dictionary=True)
         cursor.execute("""
@@ -102,8 +102,8 @@ class hospedaje:
         else:
             print("Por favor ingresar un número válido.")
 
-    @classmethod
-    def mostrar_hospedaje(cls):
+    @staticmethod
+    def mostrar_hospedaje():
         conn = conectar()
         cursor = conn.cursor(dictionary=True)
         cursor.execute("""
@@ -125,8 +125,8 @@ class hospedaje:
                 print(f"{h['descripcion']}")
                 print(f"{h['ciudad']}, {h['provincia']}\n")
 
-    @classmethod
-    def disponibilidad_hospedaje(cls, usuario):
+    @staticmethod
+    def disponibilidad_hospedaje(usuario):
         conn = conectar()
         cursor = conn.cursor(dictionary=True)
         cursor.execute("""
